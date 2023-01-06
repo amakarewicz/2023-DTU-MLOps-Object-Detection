@@ -1,32 +1,35 @@
 2023-DTU-MLOps-Object-Detection
 ==============================
 
-Final project in Machine Learning Operations course at DTU.
+This repository contains the project work carried out as a final project in Machine Learning Operations course at DTU ([course website](https://kurser.dtu.dk/course/02476)).
 
-## Overall goal of the project
+**Group 25** \
+Ditte Jensen \
+Agata Makarewicz \
+Amanda Sommer \
+Jacek Wiśniewski \
+(see contributors list for individual github pages).
 
+## Project description
+### Overall goal of the project
 
-The goal of the project is to use the DEtection TRansformer (DETR) model to detect objects in the images.
+The goal of the project is to perform an object detection task using the DEtection TRansformer (DETR) model to locate instances of objects of different classes within an image. 
 
-## What framework are you going to use (PyTorch Image Models, Transformer, Pytorch-Geometrics)
+### Framework
 
-Since we chose an image-related problem, we are going to use the Transformers framework, which provides thousands of pretrained models to perform tasks on text, vision, and audio.
+Since we are working on an image-related problem, we are going to use the Transformers framework, which provides thousands of pretrained models to perform tasks on text, vision, and audio.
 
-## How do you intend to include the framework in your project
+### Usage of the selected framework in the project
 
-We are going to start with testing a pre-trained Res-Net model from huggingface (https://huggingface.co/facebook/detr-resnet-50) on the training dataset - COCO 2017. After that, we will test the model on other datasets, and we will look for opportunities to improve the model.
+We are going to start with a pre-trained DETR model from [huggingface] (https://huggingface.co/facebook/detr-resnet-50) available through the Transformers framework, originally introduced in the paper [End-to-End Object Detection with Transformers by Carion et al.](https://arxiv.org/abs/2005.12872). Then, we intend to make use of the multiple image processors and pre-trained models which the framework offers, looking for opportunities to improve.
 
-## What data are you going to run on
+### Data
 
-Firstly, we will test the model on a COCO 2017 dataset (https://cocodataset.org/#download) which is a training dataset for the model we will work with. After that, we will try other benchmark datasets for object detection from roboflow (https://public.roboflow.com/object-detection) like Pascal VOC 2012 (https://public.roboflow.com/object-detection/pascal-voc-2012) or Mask Wearing Dataset (https://public.roboflow.com/object-detection/mask-wearing).
+Primarly, we will use the [COCO 2017 dataset](https://cocodataset.org/#download) which is a is a large-scale object detection dataset with over 200K labeled images and over 150 categories. It is also the dataset on which the pre-trained model we will use was trained on. After that, we will try other benchmark datasets for object detection task from [roboflow](https://public.roboflow.com/object-detection) like [Pascal VOC 2012](https://public.roboflow.com/object-detection/pascal-voc-2012) or [Mask Wearing Dataset](https://public.roboflow.com/object-detection/mask-wearing).
 
-## What deep learning models do you expect to use
+### Deep Learning models
 
-We will use the pre-trained model that uses DEtection TRansformer (DETR) which is an encoder-decoder transformer. It uses ResNet-50 as a convolutional backbone. For the sake of lack of time, we will focus on testing the pre-trained model with different datasets, and try to improve it with fine-tuning, to reduce the time needed for training.
-
-
-
-
+We will use the DEtection TRansformer (DETR) - a model using an encoder-decoder Transformer on top of a convolutional backbone. It uses a conventional CNN backbone to learn a 2D representation of an input image. The model we will start with uses a ResNet-50 as a convolutional backbone. Due to limited time and computational resources, we will use the pre-trained models with different datasets, and might try to improve them with fine-tuning.
 
 
 
