@@ -1,7 +1,34 @@
 2023-DTU-MLOps-Object-Detection
 ==============================
 
-Final project in Machine Learning Operations course at DTU
+Final project in Machine Learning Operations course at DTU.
+
+## Overall goal of the project
+
+
+The goal of the project is to use the DEtection TRansformer (DETR) model to detect objects in the images.
+
+## What framework are you going to use (PyTorch Image Models, Transformer, Pytorch-Geometrics)
+
+Since we chose an image-related problem, we are going to use the Transformers framework, which provides thousands of pretrained models to perform tasks on text, vision, and audio.
+
+## How do you intend to include the framework in your project
+
+We are going to start with testing a pre-trained Res-Net model from huggingface (https://huggingface.co/facebook/detr-resnet-50) on the training dataset - COCO 2017. After that, we will test the model on other datasets, and we will look for opportunities to improve the model.
+
+## What data are you going to run on
+
+Firstly, we will test the model on a COCO 2017 dataset (https://cocodataset.org/#download) which is a training dataset for the model we will work with. After that, we will try other benchmark datasets for object detection from roboflow (https://public.roboflow.com/object-detection) like Pascal VOC 2012 (https://public.roboflow.com/object-detection/pascal-voc-2012) or Mask Wearing Dataset (https://public.roboflow.com/object-detection/mask-wearing).
+
+## What deep learning models do you expect to use
+
+We will use the pre-trained model that uses DEtection TRansformer (DETR) which is an encoder-decoder transformer. It uses ResNet-50 as a convolutional backbone. For the sake of lack of time, we will focus on testing the pre-trained model with different datasets, and try to improve it with fine-tuning, to reduce the time needed for training.
+
+
+
+
+
+
 
 Project Organization
 ------------
