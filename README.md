@@ -17,7 +17,7 @@ The goal of the project is to perform an object detection task using the DEtecti
 
 ### Framework
 
-Since we are working on an image-related problem, we are going to use the Transformers framework, which provides thousands of pretrained models to perform tasks on text, vision, and audio.
+We will be using the Transformers framework, which provides thousands of pretrained models to perform tasks on text, vision, and audio.
 
 ### Usage of the selected framework in the project
 
