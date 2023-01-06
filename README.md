@@ -29,7 +29,7 @@ Primarly, we will use the [COCO 2017 dataset](https://cocodataset.org/#download)
 
 ### Deep Learning models
 
-We will use the DEtection TRansformer (DETR) - a model using an encoder-decoder Transformer on top of a convolutional backbone. It uses a conventional CNN backbone to learn a 2D representation of an input image. The model we will start with uses a ResNet-50 as a convolutional backbone. Due to limited time and computational resources, we will use the pre-trained models with different datasets, and might try to improve them with fine-tuning.
+We will use the [DEtection TRansformer (DETR)](https://github.com/facebookresearch/detr) - a model using an encoder-decoder Transformer on top of a convolutional backbone. It uses a conventional CNN backbone to learn a 2D representation of an input image. The model we will start with uses a ResNet-50 as a convolutional backbone. Due to limited time and computational resources, we will use the pre-trained models with different datasets, and might try to improve them with fine-tuning.
 
 
 
