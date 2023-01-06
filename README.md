@@ -21,7 +21,7 @@ We will be using the [Transformers](https://github.com/huggingface/transformers)
 
 ### Usage of the selected framework in the project
 
-We are going to start with a pre-trained DETR model from [huggingface](https://huggingface.co/facebook/detr-resnet-50) available through the Transformers framework, originally introduced in the paper [End-to-End Object Detection with Transformers by Carion et al.](https://arxiv.org/abs/2005.12872). Then, we intend to make use of the multiple image processors and pre-trained models which the framework offers, looking for opportunities to improve.
+We are going to start with a pre-trained DETR model from [Huggingface](https://huggingface.co/facebook/detr-resnet-50) available through the Transformers framework, originally introduced in the paper [End-to-End Object Detection with Transformers by Carion et al.](https://arxiv.org/abs/2005.12872). Then, we intend to make use of the multiple image processors and pre-trained models which the framework offers, looking for opportunities to improve.
 
 ### Data
 
