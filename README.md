@@ -10,7 +10,7 @@ Amanda Sommer \
 Jacek Wiśniewski \
 (see contributors list for individual github pages).
 
-## Project description
+## Project Description
 ### Overall goal of the project
 
 The goal of the project is to perform an object detection task using the DEtection TRansformer (DETR) model to locate instances of objects of different classes within an image. 
