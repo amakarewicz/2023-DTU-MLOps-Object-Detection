@@ -4,7 +4,7 @@
 This repository contains the project work carried out as a final project in Machine Learning Operations course at DTU ([course website](https://kurser.dtu.dk/course/02476)).
 
 **Group 25** \
-Ditte Jensen \
+Ditte Jepsen \
 Agata Makarewicz \
 Amanda Sommer \
 Jacek Wiśniewski \
