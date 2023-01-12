@@ -95,8 +95,8 @@ end of the project.
 ### Additional
 
 * [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Make sure all group members have a understanding about all parts of the project
-* [ ] Uploaded all your code to github
+* [x] Make sure all group members have a understanding about all parts of the project
+* [x] Uploaded all your code to github
 
 ## Group information
 
