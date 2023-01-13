@@ -51,7 +51,11 @@ if __name__ == '__main__':
     
     # Transform applied on input and target
     transform = transforms.Compose([transforms.CenterCrop(300), transforms.ToTensor()])
-    voc = VOCDataset(raw_folder, '2012', 'val', transform=transform)
+    try:
+        voc = VOCDataset(raw_folder, '2007', 'val', download=False, transform=transform)
+    except RuntimeError:
+        voc = VOCDataset(raw_folder, '2007', 'val', download=True, transform=transform)
+    
     print(voc.data)
     
     #data  = torchvision.datasets.VOCDetection(root = raw_folder, year = '2012', image_set = 'val', download=True, transform=transform)
