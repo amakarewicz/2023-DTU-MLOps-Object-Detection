@@ -22,9 +22,8 @@ def test_data_loading_output_is_tensor():
  
 def test_data_size():
    dataset = x #Data
-   assert len(dataset) == N_train for training and N_test for test
-   assert that each datapoint has shape [1,28,28] or [728] depending on how you choose to format
-   assert that all labels are represented
+   assert len(dataset) == N_train for training and N_test for test, "Dataset did not have the correct number of samples"
+   assert that all labels are represented, "All labels are not represented"
 
  if __name__ == "__main__":
     test_data_loading_output_is_tensor()
