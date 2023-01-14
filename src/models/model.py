@@ -5,16 +5,21 @@ import torch.nn as nn
 from transformers import DetrImageProcessor, DetrForObjectDetection
 
 class DetrModel(nn.Module): # LightningModule
-    def __init__(self):
+    def __init__(self, detection_threshold):
         super().__init__()
 
         self.processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
         self.model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
+        self.detection_threshold = detection_threshold
 
-    def forward(self, image): # TODO: change to whole batch, now working on a single image loaded as in modeling_example.ipynb
-        inputs = self.processor(images=image, return_tensors='pt')
-        outputs = self.model(**inputs)
-        return outputs
+    def forward(self, batch): # TODO: change to whole batch, now working on a single image loaded as in modeling_example.ipynb
+        inputs = self.processor(images=batch, return_tensors='pt')
+        return self.model(**inputs)
+
+    def predict(self, outputs, target_sizes):
+        return self.processor.post_process_object_detection(outputs, 
+                                                            target_sizes=target_sizes, 
+                                                            threshold=self.detection_threshold)
 
     # TODO: make it work for our model's input
     # def training_step(self, batch, ):
