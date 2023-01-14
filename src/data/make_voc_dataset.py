@@ -9,40 +9,7 @@ import PIL.Image as Image
 import os
 from pathlib import Path
 
-
-class VOCDataset(torchvision.datasets.VOCDetection):
-    """Fetch Visual Object Classes (VOC) data set  <http://host.robots.ox.ac.uk/pascal/VOC/>`_ Dataset.
-
-    Args:
-        root (string): Root directory where images are downloaded to.
-        annFile (string): Path to annotation file.
-        transform (callable, optional): A function/transform that  takes in an PIL image
-            and returns a transformed version. E.g, ``transforms.PILToTensor``
-        target_transform (callable, optional): A function/transform that takes in the
-            target and transforms it.
-        transforms (callable, optional): A function/transform that takes input sample and its target as entry
-            and returns a transformed version.
-    """
-    def __init__(self,
-                 root: str, 
-                 year: str,
-                 image_set: str,
-                 download: bool=False,
-                 transform=None,
-                 target_transform=None) -> None:
-        super().__init__(root, year, image_set, download, transform, target_transform)
-
-        self.data = torchvision.datasets.VOCDetection(root = root, year = year, image_set=image_set, download=download, transform=transform)
-        
-    def __getitem__(self, index: int):
-        img, target = super().__getitem__(index)
-        # do whatever you want
-        return img, target
-    
-    def show(self, img):
-        npimg = img.numpy()
-        plt.imshow(np.transpose(npimg, (1,2,0)), interpolation='nearest')
-
+from load_dataset import VOCDataset
 
 if __name__ == '__main__':
        

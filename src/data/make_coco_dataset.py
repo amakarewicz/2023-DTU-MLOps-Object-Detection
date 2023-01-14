@@ -8,32 +8,8 @@ import hydra
 from hydra.core.hydra_config import HydraConfig
 import torch
 
-class CocoDataset(datasets.CocoDetection):
-    def __init__(self,
-                 root: str,
-                 annFile: str,
-                 transform=None,
-                 target_transform=None) -> None:
-        super().__init__(root, annFile, transform, target_transform)
+from load_dataset import CocoDataset
 
-    def __getitem__(self, index: int):
-        img, target = super().__getitem__(index)
-        # do whatever you want
-        return img, target
-
-# TODO VOC
-# class VOCDataset(datasets.VOCDetection):
-#     def __init__(self,
-#                  root: str,
-#                  annFile: str,
-#                  transform=None,
-#                  target_transform=None) -> None:
-#         super().__init__(root, annFile, transform, target_transform)
-
-#     def __getitem__(self, index: int):
-#         img, target = super().__getitem__(index)
-#         # do whatever you want
-#         return img, target
 
 @hydra.main(config_path='../conf/dataset', config_name='coco_2017')
 def main(cfg):
