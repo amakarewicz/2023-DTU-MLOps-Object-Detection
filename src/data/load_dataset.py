@@ -66,7 +66,8 @@ class LoadImages():
         self.voc_dataset = voc_dataset
         self.transform = transforms.Compose([transforms.CenterCrop(300), transforms.ToTensor()])
 
-    def get_target_sizes(self, images: list):
+    def get_target_sizes(self, batch: tuple):
+        images = [image for (image, _) in batch]
         transform = transforms.ToPILImage()
         images_pil = [transform(image) for image in images]
         return torch.tensor([image.size[::-1] for image in images_pil])
@@ -79,6 +80,22 @@ class LoadImages():
             batch_size: Restricts the size of the data. Only for testing purposes!
         '''
 
+        # assert dataset == 'coco' or dataset == 'voc'
+
+        # # batch_size = len(dataset)
+        # if dataset == 'voc':
+        #     dataset = VOCDataset(self.paths['voc'], self.voc_year, self.voc_dataset, download=False, transform=self.transform)
+        # elif dataset == 'coco':
+        #     dataset = CocoDataset(self.paths['coco'], self.paths['coco_annotations'], self.transform)
+        
+        dataloader = self.get_dataloader(dataset, batch_size, shuffle)
+        images = [image for (image, _) in next(iter(dataloader))]
+        annotations = [annotation for (_, annotation) in next(iter(dataloader))]
+        target_sizes = self.get_target_sizes(images)
+
+        return images, annotations, target_sizes
+
+    def get_dataloader(self, dataset: str, batch_size: int, shuffle: bool = True):
         assert dataset == 'coco' or dataset == 'voc'
 
         # batch_size = len(dataset)
@@ -87,10 +104,4 @@ class LoadImages():
         elif dataset == 'coco':
             dataset = CocoDataset(self.paths['coco'], self.paths['coco_annotations'], self.transform)
         
-        dataloader = DataLoader(dataset, batch_size, shuffle=shuffle, collate_fn=lambda x: x)
-        images = [image for (image, _) in next(iter(dataloader))]
-        annotations = [annotation for (_, annotation) in next(iter(dataloader))]
-        target_sizes = self.get_target_sizes(images)
-
-        return images, annotations, target_sizes
-
+        return DataLoader(dataset, batch_size, shuffle=shuffle, collate_fn=lambda x: x)

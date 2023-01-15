@@ -1,1 +1,3 @@
-model_output_dir: outputs/2023-01-14/
+# model_output_dir: outputs/2023-01-15/21-18-00/
+dataset: voc
+batch_size: 5
