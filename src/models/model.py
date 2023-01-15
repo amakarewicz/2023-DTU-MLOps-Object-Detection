@@ -1,34 +1,46 @@
+from omegaconf import DictConfig
 import torch
 import torch.nn as nn
-# from pytorch_lightning import LightningModule
+from pytorch_lightning import LightningModule
 
 from transformers import DetrImageProcessor, DetrForObjectDetection
 
-class DetrModel(nn.Module): # LightningModule
-    def __init__(self):
+class DetrModel(LightningModule):
+    def __init__(self, config: DictConfig):
         super().__init__()
+        self.config = config
+        self.processor = DetrImageProcessor.from_pretrained(config.model.processor)
+        self.model = DetrForObjectDetection.from_pretrained(config.model.detector)
+        self.detection_threshold = config.model.detection_threshold
 
-        self.processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
-        self.model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
+    def forward(self, batch): 
+        images = [image for (image, _) in batch]
+        inputs = self.processor(images=images, return_tensors='pt')
+        return self.model(**inputs)
 
-    def forward(self, image): # TODO: change to whole batch, now working on a single image loaded as in modeling_example.ipynb
-        inputs = self.processor(images=image, return_tensors='pt')
-        outputs = self.model(**inputs)
-        return outputs
+    def training_step(self, batch):
+        images = [image for (image, _) in batch]
+        annotations = [annotation for (_, annotation) in batch]
+        labels = [self.get_labels(annot) for annot in annotations]
+        inputs = self.processor(images=images, return_tensors='pt')
+        outputs = self.model.forward(**inputs, labels=labels)
+        loss = outputs[0]
+        self.log("train_loss", loss)
+        return loss
 
-    # TODO: make it work for our model's input
-    # def training_step(self, batch, ):
-    #     b_input_ids = batch[0]
-    #     b_input_mask = batch[1]
-    #     b_labels = batch[2]
-    #     (loss, _) = self.model(
-    #         b_input_ids,
-    #         token_type_ids=None,
-    #         attention_mask=b_input_mask,
-    #         labels=b_labels,
-    #     )
-    #     self.log("train_loss", loss)
-    #     return loss
+    def configure_optimizers(self):
+        if self.config.train.optimizer == 'Adam':
+            optimizer = torch.optim.Adam(self.parameters(), lr=self.config.train.lr)
+        return optimizer
 
-    # TODO: https://github.com/nielstiben/MLOPS-Project/blob/main/src/models
-    # def configure_optimizers(self):
+    def predict(self, outputs, target_sizes):
+        return self.processor.post_process_object_detection(outputs, 
+                                                            target_sizes=target_sizes, 
+                                                            threshold=self.detection_threshold)
+
+    # TODO: change if we're using two datasets (different setup for VOC data)
+    def get_labels(self, annotations: list):
+        labels = {}
+        labels['class_labels'] = torch.LongTensor([item['category_id'] for item in annotations if 'category_id' in item]) 
+        labels['boxes'] = torch.FloatTensor([item['bbox'] for item in annotations if 'bbox' in item]) #'bndbox' for voc
+        return labels
