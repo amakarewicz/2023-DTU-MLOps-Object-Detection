@@ -1,8 +1,4 @@
 hyperparameters:
   input_filepath: '\data\raw\coco\images\val2017\' 
   annotations_filepath: '\data\raw\coco\annotations\instances_val2017.json'
-  output_filepath: 'data/processed/coco/'
-  batchsize: 1
-  shuffle: True
-
-# 'C:\Users\jwisn\OneDrive\Dokumenty\DTU\MLOps\2023-DTU-MLOps-Object-Detection\data\raw\coco\images\val2017\'
+  # output_filepath: 'data/processed/coco/'

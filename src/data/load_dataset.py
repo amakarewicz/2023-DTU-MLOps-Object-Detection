@@ -42,7 +42,6 @@ class VOCDataset(datasets.VOCDetection):
         
     def __getitem__(self, index: int):
         img, target = super().__getitem__(index)
-        # do whatever you want
         return img, target
     
     def show(self, img):
