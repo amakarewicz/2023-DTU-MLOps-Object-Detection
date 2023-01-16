@@ -56,14 +56,14 @@ if __name__ == '__main__':
     except RuntimeError:
         voc = VOCDataset(raw_folder, '2007', 'val', download=True, transform=transform)
     
-    print(voc.data)
+    #print(voc.data)
     
     #data  = torchvision.datasets.VOCDetection(root = raw_folder, year = '2012', image_set = 'val', download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(voc.data, batch_size=4, shuffle=True, collate_fn=lambda x: x )
-    print(len(next(iter(trainloader))))
+    trainloader = torch.utils.data.DataLoader(voc.data, batch_size=1, shuffle=True, collate_fn=lambda x: x )
+    print(next(iter(trainloader)))
 
-    train_img, train_label, val_img, val_label = next(iter(trainloader))
-    print(val_img)
+    train_img, train_label = next(iter(trainloader))
+    #print(train_label)
     
     #voc.show(torchvision.utils.make_grid(images, padding=20))
     #print(data) 
