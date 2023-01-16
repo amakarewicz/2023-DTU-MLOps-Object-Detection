@@ -1,0 +1,4 @@
+hyperparameters:
+  input_filepath: '/data/raw/voc/'
+  year: '2007'
+  dataset: 'val'
