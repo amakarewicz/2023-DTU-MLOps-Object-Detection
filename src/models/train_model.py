@@ -2,7 +2,7 @@ import logging
 import os
 from pathlib import Path
 
-import hydra
+import hydra 
 import pytorch_lightning as pl
 import torch
 # import wandb
@@ -26,11 +26,18 @@ def main(config: DictConfig):
         gpus = -1
     else:
         print("Using CPU for training")
-
+    
+    src_models_path = os.path.dirname(__file__)
+    src_path = os.path.dirname(src_models_path)
+    root_folder = os.path.dirname(src_path)
+    print(root_folder)
     loader = LoadImages(paths = {
-        'voc': 'E:/mlops/data/raw/voc',
-        'coco': 'E:/mlops/data/raw/coco/images/val2017/',
-        'coco_annotations': 'E:/mlops/data/raw/coco/annotations/instances_val2017.json'
+        #'voc': 'E:/mlops/data/raw/voc',
+        'voc': os.path.join(root_folder,'data','raw','voc'),
+        #'coco': 'E:/mlops/data/raw/coco/images/val2017/',
+        'coco': os.path.join(root_folder,'data','raw','coco','images','val2017'),
+        #'coco_annotations': 'E:/mlops/data/raw/coco/annotations/instances_val2017.json'
+        'coco_annotations': os.path.join(root_folder,'data','raw','coco','annotations','instances_val2017.json')
         })
     model = DetrModel(config)
 
