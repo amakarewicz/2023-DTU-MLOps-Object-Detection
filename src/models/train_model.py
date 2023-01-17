@@ -6,8 +6,8 @@ import hydra
 import pytorch_lightning as pl
 import torch
 import wandb
-# from dotenv import find_dotenv, load_dotenv
-# from google.cloud import secretmanager
+from dotenv import find_dotenv, load_dotenv
+from google.cloud import secretmanager
 from omegaconf import DictConfig
 from pytorch_lightning import Trainer
 
@@ -20,7 +20,15 @@ def main(config: DictConfig):
     logger = logging.getLogger(__name__)
     logger.info("Training...")
     
-    os.environ["WANDB_API_KEY"] = 868e83ff4fd27d92c11d8aca0b8ed3af54078e19
+    client = secretmanager.SecretManagerServiceClient()
+    PROJECT_ID = "dtu-mlops-project"
+
+    secret_id = "WANDB"
+    resource_name = f"projects/{PROJECT_ID}/secrets/{secret_id}/versions/latest"
+    response = client.access_secret_version(name=resource_name)
+    api_key = response.payload.data.decode("UTF-8")
+    os.environ["WANDB_API_KEY"] = api_key
+
     wandb.init(project="project-mlops-object-detection", entity="mlops-object-detection", config=config)
     
     torch.manual_seed(config.train.seed)
