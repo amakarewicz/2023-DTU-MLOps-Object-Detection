@@ -5,6 +5,7 @@ from pathlib import Path
 import hydra
 import pytorch_lightning as pl
 import torch
+from time import time
 # import wandb
 # from dotenv import find_dotenv, load_dotenv
 # from google.cloud import secretmanager
@@ -46,7 +47,12 @@ def main(config: DictConfig):
         model,
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
+    # saving the model
+    output_model_dir = os.path.join(os.getcwd(), "model")
+    os.makedirs(output_model_dir, exist_ok=True)
+    output_model_path = os.path.join(output_model_dir, "model.pt")
 
+    # model.save_jit(output_model_path)
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
