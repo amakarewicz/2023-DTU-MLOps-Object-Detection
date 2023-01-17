@@ -1,0 +1,3 @@
+detection_threshold: 0.9
+processor: "facebook/detr-resnet-50"
+detector: "facebook/detr-resnet-50"
