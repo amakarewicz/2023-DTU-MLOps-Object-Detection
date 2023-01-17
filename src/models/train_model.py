@@ -5,7 +5,7 @@ from pathlib import Path
 import hydra 
 import pytorch_lightning as pl
 import torch
-# import wandb
+import wandb
 # from dotenv import find_dotenv, load_dotenv
 # from google.cloud import secretmanager
 from omegaconf import DictConfig
@@ -19,6 +19,10 @@ from src.models.model import DetrModel
 def main(config: DictConfig):
     logger = logging.getLogger(__name__)
     logger.info("Training...")
+    
+    os.environ["WANDB_API_KEY"] = 868e83ff4fd27d92c11d8aca0b8ed3af54078e19
+    wandb.init(project="project-mlops-object-detection", entity="mlops-object-detection", config=config)
+    
     torch.manual_seed(config.train.seed)
     gpus = 0
     if torch.cuda.is_available():
@@ -53,7 +57,7 @@ def main(config: DictConfig):
         model,
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
-
+    wandb.log({"train/loss": loss})
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
