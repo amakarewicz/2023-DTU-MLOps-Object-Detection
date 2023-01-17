@@ -48,7 +48,7 @@ def main(config: DictConfig):
     trainer = Trainer(
         max_epochs= config.train.epochs,
         gpus=gpus,
-        logger=pl.loggers.WandbLogger(project="project-mlops-object-detection", config=config), # TODO
+        logger=pl.loggers.WandbLogger(project="project-mlops-object-detection", log_model="all", config=config), # TODO
         val_check_interval=1.0,
         check_val_every_n_epoch=1,
         gradient_clip_val=1.0,
@@ -58,6 +58,7 @@ def main(config: DictConfig):
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
     wandb.log({"train/loss": loss})
+    
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
