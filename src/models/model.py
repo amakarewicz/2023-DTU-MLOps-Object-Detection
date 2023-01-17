@@ -44,3 +44,10 @@ class DetrModel(LightningModule):
         labels['class_labels'] = torch.LongTensor([item['category_id'] for item in annotations if 'category_id' in item]) 
         labels['boxes'] = torch.FloatTensor([item['bbox'] for item in annotations if 'bbox' in item]) #'bndbox' for voc
         return labels
+
+    # def save_jit(self, file: str = "model.pt") -> None:
+    #     # token_len = self.config["build_features"]["max_sequence_length"]
+    #     # tokens_tensor = torch.ones(1, token_len).long()
+    #     # mask_tensor = torch.ones(1, token_len).float()
+    #     script_model = torch.jit.trace(self) #, [tokens_tensor, mask_tensor])
+    #     script_model.save(file)
