@@ -21,9 +21,9 @@ def main(config: DictConfig):
     logger.info("Training...")
     
     client = secretmanager.SecretManagerServiceClient()
-    PROJECT_ID = "dtu-mlops-project"
+    PROJECT_ID = "project-mlops-object-detection"
 
-    secret_id = "WANDB"
+    secret_id = "wandb-API"
     resource_name = f"projects/{PROJECT_ID}/secrets/{secret_id}/versions/latest"
     response = client.access_secret_version(name=resource_name)
     api_key = response.payload.data.decode("UTF-8")
