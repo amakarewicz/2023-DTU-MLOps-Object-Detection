@@ -64,7 +64,7 @@ class LoadImages():
         self.paths = paths
         self.voc_year = str(voc_year)
         self.voc_dataset = voc_dataset
-        self.transform = transforms.Compose([transforms.CenterCrop(300), transforms.ToTensor()])
+        self.transform = transforms.ToTensor()
 
     def get_target_sizes(self, batch: tuple):
         images = [image for (image, _) in batch]
