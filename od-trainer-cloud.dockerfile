@@ -16,6 +16,7 @@ RUN pip install dvc 'dvc[gs]'
 
 COPY requirements.txt /tmp/requirements.txt
 COPY setup.py setup.py
+RUN pip install --upgrade pip setuptools wheel
 RUN python3.9 -m pip install -r /tmp/requirements.txt --no-cache-dir
 
 COPY src/ src/
