@@ -1,0 +1,6 @@
+epochs: 2
+batch_size: 8
+optimizer: Adam
+lr: 0.0001
+dataset: coco
+seed: 123

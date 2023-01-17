@@ -1,4 +1,6 @@
 [core]
-    remote = storage
+    remote = dtu-mlops-object-detection
 ['remote "storage"']
     url = gdrive://1EkEeK56WieXo251DR_bNnpdvfirqz0BM
+['remote "dtu-mlops-object-detection"']
+    url = gs://bucket-object-detection-mlops/

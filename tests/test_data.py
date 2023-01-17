@@ -1,5 +1,5 @@
 #TestData
-
+import torch
 import pytest
 import os
 
@@ -19,6 +19,7 @@ def test_data_loading_output_is_tensor():
     assert torch.is_tensor(dataset[0].train_mask), "Train masks are not tensor"
     assert torch.is_tensor(dataset[0].val_mask), "Val masks are not tensor"
     assert torch.is_tensor(dataset[0].test_mask), "Test masks are not tensor"
+
  
 def test_data_size():
    dataset = x #Data
