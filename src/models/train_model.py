@@ -44,7 +44,7 @@ def main(config: DictConfig):
     trainer = Trainer(
         max_epochs= config.train.epochs,
         gpus=gpus,
-        # logger=pl.loggers.WandbLogger(project="", config=config), # TODO
+        logger=pl.loggers.WandbLogger(project="project-mlops-object-detection", config=config), # TODO
         val_check_interval=1.0,
         check_val_every_n_epoch=1,
         gradient_clip_val=1.0,
