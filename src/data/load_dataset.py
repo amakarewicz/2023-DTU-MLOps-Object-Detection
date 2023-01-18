@@ -54,11 +54,15 @@ class VOCDataset(datasets.VOCDetection):
     #     return DataLoader(self.data, batch_size, shuffle=True, collate_fn=lambda x: x )
 
 class LoadImages():
+    src_models_path = os.path.dirname(__file__)
+    src_path = os.path.dirname(src_models_path)
+    root_folder = os.path.dirname(src_path)
+    
     def __init__(self, 
                  paths: dict = {
-                        'voc': os.path.join('data','raw','voc'),
-                        'coco': os.path.join('data','raw','coco','images','val2017'),
-                        'coco_annotations': os.path.join('data','raw','coco','annotations','instances_val2017.json')
+                        'voc': os.path.join(root_folder,'data','raw','voc'),
+                        'coco': os.path.join(root_folder,'data','raw','coco','images','val2017'),
+                        'coco_annotations': os.path.join(root_folder,'data','raw','coco','annotations','instances_val2017.json')
                         },
                 voc_year: int = 2007,
                 voc_dataset: str = 'val'):
@@ -104,8 +108,6 @@ class LoadImages():
         if dataset == 'voc':
             dataset = VOCDataset(self.paths['voc'], self.voc_year, self.voc_dataset, download=False, transform=self.transform)
         elif dataset == 'coco':
-            print(self.paths['coco'])
-            print(self.paths['coco_annotations'])
             dataset = CocoDataset(self.paths['coco'], self.paths['coco_annotations'], self.transform)
         
         return DataLoader(dataset, batch_size, shuffle=shuffle, collate_fn=lambda x: x)
