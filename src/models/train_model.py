@@ -20,6 +20,7 @@ from src.models.model import DetrModel
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
 def main(config: DictConfig):
+    wandb.login(key='868e83ff4fd27d92c11d8aca0b8ed3af54078e19')
     wandb.init(project="project-mlops-object-detection")
     logger = logging.getLogger(__name__)
     logger.info("Training...")
