@@ -19,6 +19,8 @@ COPY data.dvc data.dvc
 WORKDIR /
 RUN pip install --upgrade pip \
     pip install -r requirements.txt --no-cache-dir
+
+RUN set -e
 RUN dvc pull
 
 ##name training script as the entry point for docker img
