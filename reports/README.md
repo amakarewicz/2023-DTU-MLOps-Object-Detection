@@ -387,7 +387,7 @@ s184303,
 >
 > Answer:
 
-![ContainerRegistry](figures/gcpContainerRegistry.png)
+![ContainerRegistry](figures/ContainerRegistry.png)
 
 ### Question 21
 
