@@ -396,7 +396,7 @@ s184303,
 >
 > Answer:
 
---- question 21 fill here ---
+![CloudBuild](figures/CloudBuild.png)
 
 ### Question 22
 
