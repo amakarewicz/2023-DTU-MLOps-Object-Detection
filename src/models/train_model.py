@@ -17,6 +17,8 @@ from pytorch_lightning import Trainer
 from src.data.load_dataset import LoadImages
 from src.models.model import DetrModel
 
+from hydra.core.hydra_config import HydraConfig
+
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
 def main(config: DictConfig):
@@ -44,18 +46,7 @@ def main(config: DictConfig):
     else:
         print("Using CPU for training")
     
-    src_models_path = os.path.dirname(__file__)
-    src_path = os.path.dirname(src_models_path)
-    root_folder = os.path.dirname(src_path)
-    print(root_folder)
-    loader = LoadImages(paths = {
-        # 'voc': 'E:/mlops/data/raw/voc',
-        'voc': os.path.join(root_folder,'data','raw','voc'),
-        # 'coco': 'E:/mlops/data/raw/coco/images/val2017/',
-        'coco': os.path.join(root_folder,'data','raw','coco','images','val2017'),
-        # 'coco_annotations': 'E:/mlops/data/raw/coco/annotations/instances_val2017.json'
-        'coco_annotations': os.path.join(root_folder,'data','raw','coco','annotations','instances_val2017.json')
-        })
+    loader = LoadImages(root_dir = HydraConfig.get().runtime.cwd)
     model = DetrModel(config)
 
     trainer = Trainer(
