@@ -19,3 +19,4 @@ matplotlib
 # pycocotools
 timm
 wandb
+scipy
