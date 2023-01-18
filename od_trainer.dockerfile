@@ -9,7 +9,7 @@ RUN apt update && \
 
 RUN pip install dvc 'dvc[gs]'
 
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY src/ src/
 COPY .git/ .git/
