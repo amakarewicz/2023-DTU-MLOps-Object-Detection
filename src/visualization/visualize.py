@@ -25,7 +25,7 @@ import requests
 import json
 from hydra.core.hydra_config import HydraConfig
 from src.data.load_dataset import *
-from src.visualization.coco_categories import COCO_INSTANCE_CATEGORY_NAMES
+from src.visualization.categories import COCO_INSTANCE_CATEGORY_NAMES
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
 def main(config: DictConfig):
