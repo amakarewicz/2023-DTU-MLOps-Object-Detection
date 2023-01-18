@@ -5,8 +5,8 @@ from pathlib import Path
 import hydra 
 import pytorch_lightning as pl
 import torch
-# import wandb
-# from dotenv import find_dotenv, load_dotenv
+import wandb
+from dotenv import find_dotenv, load_dotenv
 # from google.cloud import secretmanager
 from time import time
 
@@ -46,11 +46,11 @@ def main(config: DictConfig):
     root_folder = os.path.dirname(src_path)
     print(root_folder)
     loader = LoadImages(paths = {
-        #'voc': 'E:/mlops/data/raw/voc',
+        # 'voc': 'E:/mlops/data/raw/voc',
         'voc': os.path.join(root_folder,'data','raw','voc'),
-        #'coco': 'E:/mlops/data/raw/coco/images/val2017/',
+        # 'coco': 'E:/mlops/data/raw/coco/images/val2017/',
         'coco': os.path.join(root_folder,'data','raw','coco','images','val2017'),
-        #'coco_annotations': 'E:/mlops/data/raw/coco/annotations/instances_val2017.json'
+        # 'coco_annotations': 'E:/mlops/data/raw/coco/annotations/instances_val2017.json'
         'coco_annotations': os.path.join(root_folder,'data','raw','coco','annotations','instances_val2017.json')
         })
     model = DetrModel(config)
