@@ -5,6 +5,7 @@ import torch
 import os
 from torch.utils.data import DataLoader
 
+
 class CocoDataset(datasets.CocoDetection):
     def __init__(self,
                  root: str,
@@ -54,16 +55,17 @@ class VOCDataset(datasets.VOCDetection):
     #     return DataLoader(self.data, batch_size, shuffle=True, collate_fn=lambda x: x )
 
 class LoadImages():
-    def __init__(self, 
-                 paths: dict = {
-                        'voc': os.path.join('data','raw','voc'),
-                        'coco': os.path.join('data','raw','coco','images','val2017'),
-                        'coco_annotations': os.path.join('data','raw','coco','annotations','instances_val2017.json')
-                        },
+    def __init__(self,
+                root_dir: str = os.getcwd(),
                 voc_year: int = 2007,
                 voc_dataset: str = 'val'):
-        
-        self.paths = paths
+
+        self.root_dir = root_dir
+        self.paths = {
+                        'voc': os.path.join(root_dir, 'data','raw','voc'),
+                        'coco': os.path.join(root_dir, 'data','raw','coco','images','val2017'),
+                        'coco_annotations': os.path.join(root_dir, 'data','raw','coco','annotations','instances_val2017.json')
+                        }
         self.voc_year = str(voc_year)
         self.voc_dataset = voc_dataset
         self.transform = transforms.ToTensor()
