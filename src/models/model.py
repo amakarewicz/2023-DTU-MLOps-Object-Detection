@@ -2,6 +2,7 @@ from omegaconf import DictConfig
 import torch
 import torch.nn as nn
 from pytorch_lightning import LightningModule
+import wandb
 
 from transformers import DetrImageProcessor, DetrForObjectDetection
 
@@ -26,6 +27,7 @@ class DetrModel(LightningModule):
         outputs = self.model.forward(**inputs, labels=labels)
         loss = outputs[0]
         self.log("train_loss", loss)
+        wandb.log({"train/loss": loss})
         return loss
 
     def configure_optimizers(self):
