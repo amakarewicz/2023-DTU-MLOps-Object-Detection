@@ -55,7 +55,6 @@ def main(config: DictConfig):
     pred = model.predict(outputs, target_sizes=loader.get_target_sizes(batch))
     pred_dict = {'predictions': [get_results(d) for d in pred]}
     
-    time_str = time.strftime("%Y-%m-%d-%H-%M-%S")
     output_prediction_file = os.path.join(output_prediction_dir, "results.json")
 
     json_object = json.dumps(pred_dict, indent=4)

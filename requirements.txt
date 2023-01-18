@@ -16,3 +16,5 @@ pytorch_lightning
 omegaconf
 transformers
 matplotlib
+# pycocotools
+timm
