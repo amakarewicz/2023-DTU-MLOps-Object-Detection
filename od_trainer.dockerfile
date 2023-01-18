@@ -7,10 +7,14 @@ RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt requirements.txt
+RUN pip install dvc 'dvc[gs]'
+
+COPY requirements.txt /tmp/requirements.txt
 COPY setup.py setup.py
 COPY src/ src/
-#COPY data/ data/
+COPY .git/ .git/
+COPY .dvc/config .dvc/config
+COPY data.dvc data.dvc
 
 WORKDIR /
 RUN pip install --upgrade pip \
@@ -18,5 +22,3 @@ RUN pip install --upgrade pip \
 
 ##name training script as the entry point for docker img
 ENTRYPOINT [ "python", "-u" , "src/models/train_model.py"]
-#ENTRYPOINT ["python", "-u", "main.py"]
-

@@ -5,9 +5,9 @@ from pathlib import Path
 import hydra 
 import pytorch_lightning as pl
 import torch
-import wandb
-from dotenv import find_dotenv, load_dotenv
-from google.cloud import secretmanager
+# import wandb
+# from dotenv import find_dotenv, load_dotenv
+# from google.cloud import secretmanager
 from time import time
 
 from omegaconf import DictConfig
@@ -22,16 +22,16 @@ def main(config: DictConfig):
     logger = logging.getLogger(__name__)
     logger.info("Training...")
     
-    client = secretmanager.SecretManagerServiceClient()
-    PROJECT_ID = "project-mlops-object-detection"
+    # client = secretmanager.SecretManagerServiceClient()
+    # PROJECT_ID = "project-mlops-object-detection"
 
-    secret_id = "wandb-API"
-    resource_name = f"projects/{PROJECT_ID}/secrets/{secret_id}/versions/latest"
-    response = client.access_secret_version(name=resource_name)
-    api_key = response.payload.data.decode("UTF-8")
-    os.environ["WANDB_API_KEY"] = api_key
+    # secret_id = "wandb-API"
+    # resource_name = f"projects/{PROJECT_ID}/secrets/{secret_id}/versions/latest"
+    # response = client.access_secret_version(name=resource_name)
+    # api_key = response.payload.data.decode("UTF-8")
+    # os.environ["WANDB_API_KEY"] = api_key
 
-    wandb.init(project="project-mlops-object-detection", entity="mlops-object-detection", config=config)
+    # wandb.init(project="project-mlops-object-detection", entity="mlops-object-detection", config=config)
     
     torch.manual_seed(config.train.seed)
     gpus = 0
@@ -68,7 +68,7 @@ def main(config: DictConfig):
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
     
-    wandb.log({"train/loss": loss})
+    # wandb.log({"train/loss": loss})
     
     # saving the model
     output_model_dir = os.path.join(os.getcwd(), "model")
