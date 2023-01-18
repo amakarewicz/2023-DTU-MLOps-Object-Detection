@@ -376,7 +376,9 @@ s184303,
 >
 > Answer:
 
---- question 19 fill here ---
+![Bucket1](figures/Bucket1.png)
+
+![Bucket2](figures/Bucket2.png)
 
 ### Question 20
 
