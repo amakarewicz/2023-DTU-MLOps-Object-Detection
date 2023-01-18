@@ -36,7 +36,7 @@ def main(config: DictConfig):
     # results - from json
     root_dir = HydraConfig.get().runtime.cwd
     
-    images_dir_path = os.path.join('E:/mlops/', config.visualize.images_input_dir)
+    images_dir_path = os.path.join(root_dir, config.visualize.images_input_dir)
     image_path = os.path.join(images_dir_path, os.listdir(images_dir_path)[config.visualize.image_no])
 
     results_path = os.path.join(root_dir, config.visualize.results_input_dir, 'predictions/results.json')
