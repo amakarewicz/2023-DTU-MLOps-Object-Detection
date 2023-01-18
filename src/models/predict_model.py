@@ -30,6 +30,7 @@ def main(config: DictConfig):
     loader = LoadImages()
     dataloader = loader.get_dataloader(config.predict.dataset, config.predict.batch_size, shuffle=False)
     batch = next(iter(dataloader))
+    print(len(batch))
 
 #     # %% Load local config in output directory
 #     output_config_path = os.path.join(output_dir, ".hydra", "config.yaml")
@@ -46,7 +47,7 @@ def main(config: DictConfig):
     model = DetrModel(config)
 #     model.load_from_checkpoint(output_checkpoint_latest_path, config=output_config)
     outputs = model.forward(batch)
-    print(outputs.shape)
+    
 
     # %% Predict and save to output directory
     output_prediction_dir = os.path.join(os.getcwd(), "predictions")
