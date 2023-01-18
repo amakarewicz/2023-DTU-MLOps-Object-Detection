@@ -7,6 +7,7 @@ import pytorch_lightning as pl
 import torch
 import wandb
 from dotenv import find_dotenv, load_dotenv
+
 # from google.cloud import secretmanager
 from time import time
 
@@ -19,6 +20,7 @@ from src.models.model import DetrModel
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
 def main(config: DictConfig):
+    wandb.init(project="project-mlops-object-detection")
     logger = logging.getLogger(__name__)
     logger.info("Training...")
     
@@ -68,7 +70,7 @@ def main(config: DictConfig):
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
     
-    # wandb.log({"train/loss": loss})
+    wandb.log({"train": model.training_step()})
     
     # saving the model
     output_model_dir = os.path.join(os.getcwd(), "model")
