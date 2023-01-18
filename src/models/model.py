@@ -14,13 +14,13 @@ class DetrModel(LightningModule):
         self.detection_threshold = config.model.detection_threshold
 
     def forward(self, batch): 
-        images = [image for (image, _) in batch]
+        images = [image for (image, _, _) in batch]
         inputs = self.processor(images=images, return_tensors='pt')
         return self.model(**inputs)
 
     def training_step(self, batch):
-        images = [image for (image, _) in batch]
-        annotations = [annotation for (_, annotation) in batch]
+        images = [image for (image, _, _) in batch]
+        annotations = [annotation for (_, annotation, _) in batch]
         labels = [self.get_labels(annot) for annot in annotations]
         inputs = self.processor(images=images, return_tensors='pt')
         outputs = self.model.forward(**inputs, labels=labels)

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import torch
 import os
 from torch.utils.data import DataLoader
+from pycocotools.coco import COCO
 
 class CocoDataset(datasets.CocoDetection):
     def __init__(self,
@@ -15,7 +16,9 @@ class CocoDataset(datasets.CocoDetection):
 
     def __getitem__(self, index: int):
         img, target = super().__getitem__(index)
-        return img, target
+        id = self.ids[index]
+        path = self.coco.loadImgs(id)[0]["file_name"]
+        return img, target, path
 
 
 class VOCDataset(datasets.VOCDetection):
@@ -40,7 +43,7 @@ class VOCDataset(datasets.VOCDetection):
                  target_transform=None) -> None:
         super().__init__(root, year, image_set, download, transform, target_transform)
 
-        # self.data = datasets.VOCDetection(root = root, year = year, image_set=image_set, download=download, transform=transform)
+        # self.data = CocoDataset(os.path.join('data','raw','coco','images','val2017'), os.path.join('data','raw','coco','annotations','instances_val2017.json'), transforms.Compose([transforms.CenterCrop(300), transforms.ToTensor()]))
         
     def __getitem__(self, index: int):
         img, target = super().__getitem__(index)
@@ -91,8 +94,8 @@ class LoadImages():
         #     dataset = CocoDataset(self.paths['coco'], self.paths['coco_annotations'], self.transform)
         
         dataloader = self.get_dataloader(dataset, batch_size, shuffle)
-        images = [image for (image, _) in next(iter(dataloader))]
-        annotations = [annotation for (_, annotation) in next(iter(dataloader))]
+        images = [image for (image, _, _) in next(iter(dataloader))]
+        annotations = [annotation for (_, annotation, _) in next(iter(dataloader))]
         target_sizes = self.get_target_sizes(images)
 
         return images, annotations, target_sizes
@@ -109,3 +112,4 @@ class LoadImages():
             dataset = CocoDataset(self.paths['coco'], self.paths['coco_annotations'], self.transform)
         
         return DataLoader(dataset, batch_size, shuffle=shuffle, collate_fn=lambda x: x)
+
