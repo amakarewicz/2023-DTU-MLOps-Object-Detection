@@ -46,6 +46,7 @@ def main(config: DictConfig):
     model = DetrModel(config)
 #     model.load_from_checkpoint(output_checkpoint_latest_path, config=output_config)
     outputs = model.forward(batch)
+    print(outputs.shape)
 
     # %% Predict and save to output directory
     output_prediction_dir = os.path.join(os.getcwd(), "predictions")

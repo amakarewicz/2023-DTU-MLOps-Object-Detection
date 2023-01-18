@@ -14,6 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torchvision.transforms.functional as F
 import os
+import click
 
 # For drawing bounding boxes.
 from torchvision.utils import draw_bounding_boxes
@@ -27,19 +28,20 @@ from hydra.core.hydra_config import HydraConfig
 from src.data.load_dataset import *
 from src.visualization.coco_categories import COCO_INSTANCE_CATEGORY_NAMES
 
+
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
-def main(config: DictConfig):
+def main(img, config: DictConfig):
     logger = logging.getLogger(__name__)
     logger.info("Visualizing...")
 
     # how to get the original image !!!
     # results - from json
-    root_dir = HydraConfig.get().runtime.cwd
-    
+    root_dir = HydraConfig.get().runtime.cwd 
+
     images_dir_path = os.path.join(root_dir, config.visualize.images_input_dir)
     image_path = os.path.join(images_dir_path, os.listdir(images_dir_path)[config.visualize.image_no])
-
     results_path = os.path.join(root_dir, config.visualize.results_input_dir, 'predictions/results.json')
+    
     with open(results_path, 'r') as j:
         batch_results = json.loads(j.read())
     results = batch_results['predictions'][config.visualize.image_no]
@@ -51,7 +53,8 @@ def main(config: DictConfig):
     colors = np.random.randint(0, 255, size=(len(pred_bboxes), 3))
     colors = [tuple(color) for color in colors]
 
-    image_np = np.array(Image.open(image_path))
+    #image_np = np.array(Image.open(image_path))
+    image_np = np.array(Image.open(f"../../{img}"))
     image_transposed = np.transpose(image_np, [2, 0, 1])
     int_input = torch.tensor(image_transposed)
 
@@ -65,6 +68,7 @@ def main(config: DictConfig):
 
     torchvision.transforms.ToPILImage()(result_with_boxes).show()
     # TODO: wrong assignment (results - image)
+
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
