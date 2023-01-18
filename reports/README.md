@@ -56,27 +56,27 @@ end of the project.
 * [x] Create the initial file structure using cookiecutter
 * [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
 * [x] Add a model file and a training script and get that running
-* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
+* [ ] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project
 * [x] Do a bit of code typing and remember to document essential parts of your code
 * [x] Setup version control for your data or part of your data
 * [ ] Construct one or multiple docker files for your code
 * [ ] Build the docker files locally and make sure they work as intended
-* [ ] Write one or multiple configurations files for your experiments
-* [ ] Used Hydra to load the configurations and manage your hyperparameters
+* [x] Write one or multiple configurations files for your experiments
+* [x] Used Hydra to load the configurations and manage your hyperparameters
 * [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
-* [ ] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
 * [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 ### Week 2
 
-* [ ] Write unit tests related to the data part of your code
+* [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
 * [ ] Calculate the coverage.
 * [ ] Get some continuous integration running on the github repository
-* [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
+* [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [ ] Create a trigger workflow for automatically building your docker images
 * [ ] Get your model training in GCP using either the Engine or Vertex AI
 * [ ] Create a FastAPI application that can do inference using your model
@@ -110,13 +110,9 @@ Group 25
 ### Question 2
 > **Enter the study number for each member in the group**
 >
-> Example:
->
-> *sXXXXXX, sXXXXXX, sXXXXXX*
->
 > Answer:
 
-s184303,
+s184303, s180857, s201773, s222678
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -129,7 +125,10 @@ s184303,
 >
 > Answer:
 
---- question 3 fill here ---
+We used the [Transformers](https://github.com/huggingface/transformers) framework from Huggingface in our project to perform object detection in images. We used the pretrained [DEtection TRansformer (DETR) model](https://huggingface.co/facebook/detr-resnet-50), which uses a CNN backbone to learn a 2D representation of input image.<br>
+
+Furthermore, we used the dataset  [COCO 2017 dataset](https://cocodataset.org/#download) available through the torchvision module for both training and testing. The dataset consist of images which are annotated with class labels and maskes for each object.    
+
 
 ## Coding environment
 
@@ -156,14 +155,12 @@ s184303,
 > **code. Did you fill out every folder or only a subset?**
 >
 > Answer length: 100-200 words
->
-> Example:
-> *From the cookiecutter template we have filled out the ... , ... and ... folder. We have removed the ... folder*
-> *because we did not use any ... in our project. We have added an ... folder that contains ... for running our*
-> *experiments.*
-> Answer:
 
---- question 5 fill here ---
+We initilized our project with the cookicutter template. From the template we have filled out the src, report and notebook folders. Furthermore we have also edited the pre created file requirements.txt.<br>
+We chose not to remove the unused folders, but instead list the unused folder here. We did not use the folder models in our project. <br>
+
+We have added an .dvc folder and additionally dvc file for the storage in dvc. Furthermore we have added a tests folder with the test scripts.   
+
 
 ### Question 6
 
@@ -172,9 +169,9 @@ s184303,
 >
 > Answer length: 50-100 words.
 >
-> Answer:
+To insure code quality we have implemented Flake8. It is a tool that ensures the same code style (pep8) throughout the project.<br>
+To maintain good code quality it is important to set up some rules. Especially for larger projects where **\*\*xxx**. 
 
---- question 6 fill here ---
 
 ## Version control
 
@@ -193,7 +190,7 @@ s184303,
 >
 > Answer:
 
---- question 7 fill here ---
+We have implemented tests for data, training and modelling. For the data we test for **x,y,z…..** In total we have implemented X tests. 
 
 ### Question 8
 
@@ -208,7 +205,7 @@ s184303,
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of code is **X %**. Even if we had 100 % code coverage we would still not be able to completely trust the code. It would not be possible to say that all possible errors is tested for since it is a very difficult and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for.
 
 ### Question 9
 
@@ -223,7 +220,7 @@ s184303,
 >
 > Answer:
 
---- question 9 fill here ---
+We used branches to version control the code and to easier work together. With the use of branches we were able to modify, create and control different part of the code simultaneously. We used pull request to merge the code and make sure everything were able to run smoothly by reviewing each others code before merging.  
 
 ### Question 10
 
@@ -238,7 +235,9 @@ s184303,
 >
 > Answer:
 
---- question 10 fill here ---
+We used DVC for version control of our data. Furthermore we also made use of google cloud storage for our data. In the end we did not have multiple versions of data and did therefore not use the version control that much, but we were able to set it up for further usage. <br>
+DVC and cloud storage is both beneficial for version contral and in projects where data is transformed and storage in different formates it is useful to have the version contral set up. 
+
 
 ### Question 11
 
@@ -320,7 +319,7 @@ s184303,
 >
 > Answer:
 
---- question 15 fill here ---
+We have created two docker files for our project, one for training and one for predicting.   
 
 ### Question 16
 
@@ -352,7 +351,10 @@ s184303,
 >
 > Answer:
 
---- question 17 fill here ---
+We used the following five services on the google cloud platform: Cloud Storage(Bucket), Compute Engine, Cloud Build(Triggers), Container Registy and Vertex AI.<br>
+Vertex AI is used for training the model. Vertex AI creates a VM and use the training docker image to train the model. The docker images is stored in the Container Registy and the images is uploaded to the cloud by the Cloud Build Triggers.<br>
+Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we started by using Computer Engine and created VM, but later on we used Vertex AI to create the VM. 
+
 
 ### Question 18
 
@@ -476,7 +478,10 @@ s184303,
 >
 > Answer:
 
---- question 26 fill here ---
+First of all we spend multiple days on retrieving the data and making it fit our model.<br>
+**\*\*\*….**<br>
+We also spend a lot of time on the FastAPI to make it work, or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. 
+
 
 ### Question 27
 
