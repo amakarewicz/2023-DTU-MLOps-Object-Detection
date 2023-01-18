@@ -141,14 +141,11 @@ Furthermore, we used the dataset  [COCO 2017 dataset](https://cocodataset.org/#d
 > **through to get an exact copy of your environment.**
 >
 > Answer length: 100-200 words
->
-> Example:
-> *We used ... for managing our dependencies. The list of dependencies was auto-generated using ... . To get a*
-> *complete copy of our development enviroment, one would have to run the following commands*
->
-> Answer:
 
---- question 4 fill here ---
+We used Conda to create a separate environment for managing our dependencies. The list of dependencies was auto-generated using the module `pipreqs`, through which a requirements.txt file was generated. To get a complete copy of our development environment, one would have to run the following commands `pip install -r requirements.txt` This is the initial and most simple way to secure reproducibility of the python part of the full model environment.<br>
+Furthermore, to set up the correct system-level dependencies a new team member would need to build and succeedingly run the Docker image(s) created from the Dockerfiles contained in the project, i.e., running <br>
+`docker build -f od_trainer.dockerfile . -t trainer:latest`<br>
+`docker run --name od_trainer -v %cd%/models:/models/ trainer:latest`
 
 ### Question 5
 
@@ -157,10 +154,7 @@ Furthermore, we used the dataset  [COCO 2017 dataset](https://cocodataset.org/#d
 >
 > Answer length: 100-200 words
 
-We initilized our project with the cookicutter template. From the template we have filled out the src, report and notebook folders. Furthermore we have also edited the pre created file requirements.txt.<br>
-We chose not to remove the unused folders, but instead list the unused folder here. We did not use the folder models in our project. <br>
-
-We have added an .dvc folder and additionally dvc file for the storage in dvc. Furthermore we have added a tests folder with the test scripts.   
+We initilized our project with the cookicutter template. Most of the default scripts, such as `make_dataset.py`, `model.py`, `train_model.py`, `predict_model.py` etc. have been filled with code for this specific object detection in images-project. Furthermore we have added content to the test scripts which are also set up by default for unit testing. We have mainly followed the pre-created content- and folder structure (src/, report/, notebooks/, etc.), and added additional folders if necessary or convenient. As an example we have created a config folder that keeps track of configuration files for different parts of the project with a default_config.yaml pointing to the task-dependent config files, e.g. predict_config.yaml for prediction reproducability. Furthermore we have updated the requirements.txt to match the required Python environment.<br> We have also added a .dvc folder and additionally dvc file for the storage in dvc. These were both generated automatically when setting up the data version control for the project using dvc with google drive and cloud. 
 
 
 ### Question 6
@@ -170,9 +164,8 @@ We have added an .dvc folder and additionally dvc file for the storage in dvc. F
 >
 > Answer length: 50-100 words.
 >
-To insure code quality we have implemented Flake8. It is a tool that ensures the same code style (pep8) throughout the project.<br>
-To maintain good code quality it is important to set up some rules. Especially for larger projects where **\*\*xxx**. 
-
+To insure code quality we have implemented the module `Flake8`. It is a tool that helps to ensure the same code style throughout the project by providing overview of sections where the code does not seems to be following the style and rules suggested by Pep8 (the official style guide for python).<br>
+To a large extend we have also made use of *Typing*, however it's has not been a priority to strickly make sure its present in all our created functions. The use of both typing and docstrings have been a usefull guide to the team, since it easily can become confusing to remember the required insput and uses of the various functions that are develop throghout the project.
 
 ## Version control
 
@@ -200,13 +193,9 @@ We have implemented tests for data, training and modelling. For the data we test
 >
 > Answer length: 100-200 words.
 >
-> Example:
-> *The total code coverage of code is X%, which includes all our source code. We are far from 100% coverage of our **
-> *code and even if we were then...*
->
 > Answer:
 
-The total code coverage of code is **X %**. Even if we had 100 % code coverage we would still not be able to completely trust the code. It would not be possible to say that all possible errors is tested for since it is a very difficult and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for.
+The total code coverage of code is **X %**. The coverage-metric is based on to what extend all functions in the model are called in the test functions. Even if we had 100 % code coverage, i.e. all functions are called at least one time during project testing, we would still not be able to completely trust the code. The reason this is not bullet-proof is that you may not cover all possible error types even though the function is used in a test and some unintended input/output errors may go undiscovered because you test for something else. It is a tedious and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for. 
 
 ### Question 9
 
@@ -215,13 +204,7 @@ The total code coverage of code is **X %**. Even if we had 100 % code coverage w
 >
 > Answer length: 100-200 words.
 >
-> Example:
-> *We made use of both branches and PRs in our project. In our group, each member had an branch that they worked on in*
-> *addition to the main branch. To merge code we ...*
->
-> Answer:
-
-We used branches to version control the code and to easier work together. With the use of branches we were able to modify, create and control different part of the code simultaneously. We used pull request to merge the code and make sure everything were able to run smoothly by reviewing each others code before merging.  
+The workflow has been highly dependend on version control using git. We used branches to version control different components of the code, which eased the process in collaborating and editing simultaneously. We used the branches to represent a component in the code rather than different team members' work. This was the preferred workflow since multiple members often contributed in a single component and it was easier to track changes in certain functionalities. We used pull request to merge amended/added code of a (new) component in to the main branch and make sure everything were able to run smoothly by reviewing each others code before merging.
 
 ### Question 10
 
@@ -242,7 +225,7 @@ DVC and cloud storage is both beneficial for version contral and in projects whe
 
 ### Question 11
 
-> **Discuss you continues integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test**
+> **Discuss your continuous integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test**
 > **multiple operating systems, python version etc. Do you make use of caching? Feel free to insert a link to one of**
 > **your github actions workflow.**
 >
@@ -268,12 +251,9 @@ DVC and cloud storage is both beneficial for version contral and in projects whe
 >
 > Answer length: 50-100 words.
 >
-> Example:
-> *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
->
-> Answer:
 
---- question 12 fill here ---
+In order to configure our python scripts we created configuration files and used Hydra to load the configurations.
+Regarding experiements we used **XXX** as a tool to manage the hyperparameters, which works in the following way: **(python my_script.py --lr 1e-3 --batch_size 25)**
 
 ### Question 13
 
