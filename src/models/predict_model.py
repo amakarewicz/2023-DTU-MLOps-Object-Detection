@@ -10,6 +10,7 @@ import numpy as np
 from omegaconf import DictConfig
 from src.models.model import DetrModel
 from src.data.load_dataset import *
+from hydra.core.hydra_config import HydraConfig
 
 def get_results(pred: dict):
 	values_list = [x.tolist() for x in pred.values()]
@@ -27,7 +28,7 @@ def main(config: DictConfig):
     #         'The "model_output_dir" path ({}) could not be found'.format(output_dir)
     #     )
     
-    loader = LoadImages()
+    loader = LoadImages(root_dir = HydraConfig.get().runtime.cwd)
     dataloader = loader.get_dataloader(config.predict.dataset, config.predict.batch_size, shuffle=False)
     batch = next(iter(dataloader))
 
