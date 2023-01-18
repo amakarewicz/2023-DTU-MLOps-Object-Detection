@@ -385,7 +385,7 @@ s184303,
 >
 > Answer:
 
---- question 20 fill here ---
+[!Container](reports/figures/gcpContainerRegisty.png)
 
 ### Question 21
 
