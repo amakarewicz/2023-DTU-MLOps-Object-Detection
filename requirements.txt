@@ -18,3 +18,5 @@ transformers
 matplotlib
 # pycocotools
 timm
+wandb
+scipy

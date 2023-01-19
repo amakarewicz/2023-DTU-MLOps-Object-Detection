@@ -22,7 +22,6 @@ def test_coco_data():
     dir = os.listdir(path)
     assert len(dir)>0
 
-
 def test_data_size():
      with initialize("../src/conf"):
         cfg = compose(config_name="default_config.yaml")
@@ -30,5 +29,4 @@ def test_data_size():
         dataloader = loader.get_dataloader(dataset=cfg.predict.dataset, batch_size=cfg.predict.batch_size, shuffle=False)
         batch = next(iter(dataloader))
         assert len(batch) == 5
-
 
