@@ -48,28 +48,24 @@ def main(config: DictConfig):
     
     loader = LoadImages(root_dir = HydraConfig.get().runtime.cwd)
     model = DetrModel(config)
+    # saving the model
+    output_model_dir = os.path.join(os.getcwd(), "model")
+    os.makedirs(output_model_dir, exist_ok=True)
+    # output_model_path = os.path.join(output_model_dir, "model.pt")
 
     trainer = Trainer(
         max_epochs= config.train.epochs,
         gpus=gpus,
         logger=pl.loggers.WandbLogger(project="project-mlops-object-detection", log_model="all", config=config), # TODO
-        val_check_interval=1.0,
-        check_val_every_n_epoch=1,
-        gradient_clip_val=1.0,
+        # val_check_interval=1.0,
+        # check_val_every_n_epoch=1,
+        # gradient_clip_val=1.0,
+        default_root_dir='gs://od-model-checkpoints/'
     )
     trainer.fit(
         model,
         train_dataloaders=loader.get_dataloader(config.train.dataset, config.train.batch_size),
     )
-    
-    wandb.log({"train": model.training_step()})
-    
-    # saving the model
-    output_model_dir = os.path.join(os.getcwd(), "model")
-    os.makedirs(output_model_dir, exist_ok=True)
-    output_model_path = os.path.join(output_model_dir, "model.pt")
-
-    # model.save_jit(output_model_path)
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
