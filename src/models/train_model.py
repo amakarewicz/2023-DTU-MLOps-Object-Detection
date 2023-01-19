@@ -60,7 +60,7 @@ def main(config: DictConfig):
         # val_check_interval=1.0,
         # check_val_every_n_epoch=1,
         # gradient_clip_val=1.0,
-        default_root_dir=output_model_dir
+        default_root_dir='gs://od-model-checkpoints/'
     )
     trainer.fit(
         model,
