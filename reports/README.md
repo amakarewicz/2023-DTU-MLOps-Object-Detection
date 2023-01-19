@@ -67,19 +67,18 @@ end of the project.
 * [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
 * [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
-* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
-* [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
+* [x] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 ### Week 2
 
 * [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
-* [ ] Calculate the coverage.
+* [x] Calculate the coverage.
 * [ ] Get some continuous integration running on the github repository
 * [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [x] Create a trigger workflow for automatically building your docker images
-* [ ] Get your model training in GCP using either the Engine or Vertex AI
+* [x] Get your model training in GCP using either the Engine or Vertex AI
 * [ ] Create a FastAPI application that can do inference using your model
 * [ ] If applicable, consider deploying the model locally using torchserve
 * [ ] Deploy your model in GCP using either Functions or Run as the backend
