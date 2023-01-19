@@ -13,12 +13,14 @@ COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY src/ src/
 COPY .git/ .git/
-COPY .dvc/config .dvc/config
 COPY data.dvc data.dvc
 
 WORKDIR /
 RUN pip install --upgrade pip \
     pip install -r requirements.txt --no-cache-dir
+
+RUN dvc init --no-scm
+RUN dvc remote add -d myremote gs://bucket-object-detection-mlops/
 RUN dvc pull
 
 ##name training script as the entry point for docker img
