@@ -85,6 +85,7 @@ def main(config: DictConfig):
     with fs.open("od-model-checkpoints/deployable_model.pkl", "wb") as file:
         pickle.dump(model.model, file)
 
+
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
