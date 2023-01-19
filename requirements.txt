@@ -21,3 +21,4 @@ timm
 wandb
 scipy
 pickle-mixin
+gcsfs
