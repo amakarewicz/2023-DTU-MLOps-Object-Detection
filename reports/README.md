@@ -404,7 +404,7 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
---- question 22 fill here ---
+We managed to deploy the model in the cloud. 
 
 ### Question 23
 
@@ -433,7 +433,7 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
---- question 24 fill here ---
+s184303 has 0 credit left due to the large training of the model. 
 
 ## Overall discussion of project
 
@@ -454,7 +454,11 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
---- question 25 fill here ---
+The first step in our process was setting up everything on our local machines: getting the data, creating the model, training and prediction script. We also created version contral on dvs in the beginning of our process. From the local machines we used branches to modify our code, and then used pull request to the main. The pull requests triggers the git actions for testing the code befor merging. When everything was set up on github we used gcp triggers to build docker images in the container registry in the cloud. We also stored our data in the google cloud storage. For training we used Vertex AI and stored model veriables in Weights and Biasis. To deploy the model in the cloud we used FastAPI. 
+
+If a user wants to reproduce our model, they have to clone our code and use the docker images. Furthermore the model can be used from the query server. 
+
+![overview](figures/Overview.png)
 
 ### Question 26
 
@@ -468,9 +472,8 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
-First of all we spend multiple days on retrieving the data and making it fit our model.This was a big challange that we managed to overcome. <br>
-**\*\*\*….**<br>
-We also spend a lot of time on the FastAPI to make it work, or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. 
+First of all we spend multiple days on retrieving the data and making it fit our model. This was a big challenge that we managed to overcome.
+We also spend a lot of time on the FastAPI to make it work.Or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. Furthermore we had troubles making the unittest for the model and training and did not manage to make it work (therefore not included in the commited project). It was a difficult challenge and we ended up spending a lot of time on this task. 
 
 
 ### Question 27
