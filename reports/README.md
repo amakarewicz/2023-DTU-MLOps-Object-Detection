@@ -56,7 +56,7 @@ end of the project.
 * [x] Create the initial file structure using cookiecutter
 * [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
 * [x] Add a model file and a training script and get that running
-* [ ] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
+* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project
 * [x] Do a bit of code typing and remember to document essential parts of your code
 * [x] Setup version control for your data or part of your data
@@ -286,7 +286,9 @@ We made use of config files as already explained in the privious question. To re
 >
 > Answer:
 
-As seen in the image multiple test has been run on the training of the model. Some of the tracked runs has been initial testing of the model to further improve the code of the model. Some of the short runs is training that has been stoped due to local capasity and the time of training locally. The runs that has performed the best and run the most is the cloud experiments of the model due to the use of VM. 
+As seen in the image multiple experience has been run on the training of the model. Some of the tracked runs has been initial testing of the model to further improve the code of the model. Some of the short runs is trainings that has been stoped due to local capasity and the time of training locally. The runs that has performed the best and run the longest is the cloud experiments of the model due to the use of VM. 
+
+The last picture shows that the loss does not change much ower time. This could very well be due to the fact that we are training a pre trained model on the same data as it was alreasdy trained on. To further improve the model we would (in case we had more time) train the model on a new data set. 
 
 ![wandb1](figures/wandb1.png)
 
@@ -307,7 +309,7 @@ As seen in the image multiple test has been run on the training of the model. So
 >
 > Answer:
 
-We have created two docker files for our project, one for training and one for predicting.   
+We have created two docker images for our project, one for training and one for predicting. (In our google cloud platform we have multiple docker images due to multiple experiments with different versions of our docker images).   
 
 ### Question 16
 
