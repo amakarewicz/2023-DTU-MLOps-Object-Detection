@@ -454,7 +454,7 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
---- question 25 fill here ---
+![overview](figures/overview.png)
 
 ### Question 26
 
