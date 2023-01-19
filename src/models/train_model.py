@@ -14,6 +14,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from src.data.load_dataset import LoadImages
 from src.models.model import DetrModel
 import pickle
+import gcsfs
 
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
@@ -75,9 +76,14 @@ def main(config: DictConfig):
         ),
     )
 
-    filename = os.path.join(root_dir, 'models', 'deployable_model.pkl')
-    pickle.dump(model.model, open(filename, 'wb'))
+    # Local
+    # filename = os.path.join(root_dir, 'models', 'deployable_model.pkl')
+    # pickle.dump(model.model, open(filename, 'wb'))
 
+    # Cloud
+    fs = gcsfs.GCSFileSystem(project='DTU-MLOps-Object-Detection')
+    with fs.open("od-model-checkpoints/deployable_model.pkl", "wb") as file:
+        pickle.dump(model.model, file)
 
 if __name__ == "__main__":
     log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
