@@ -2,6 +2,6 @@
 
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'od-trainer-cloud.dockerfile', '-t', 'gcr.io/dtu-mlops-object-detection/od-trainer-cloud', '.']
+  args: ['build', '-f', 'od-trainer-cloud.dockerfile', '-t', 'gcr.io/dtu-mlops-object-detection/od_trainer', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/dtu-mlops-object-detection/od-trainer-cloud']
+  args: ['push', 'gcr.io/dtu-mlops-object-detection/od_trainer']
