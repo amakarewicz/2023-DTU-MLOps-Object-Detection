@@ -1,6 +1,6 @@
-epochs: 0
-batch_size: 8
+epochs: 1
+batch_size: 16
 optimizer: Adam
-lr: 0.0001
-dataset: coco
+lr: 0.001
+dataset: voc
 seed: 123

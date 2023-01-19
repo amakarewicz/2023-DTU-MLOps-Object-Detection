@@ -2,8 +2,10 @@ from omegaconf import DictConfig
 import torch
 import torch.nn as nn
 from pytorch_lightning import LightningModule
+import wandb
 
 from transformers import DetrImageProcessor, DetrForObjectDetection
+from src.visualization.categories import VOC_TO_COCO_DICT
 
 class DetrModel(LightningModule):
     def __init__(self, config: DictConfig):
@@ -20,12 +22,16 @@ class DetrModel(LightningModule):
 
     def training_step(self, batch):
         images = [image for (image, _) in batch]
-        annotations = [annotation for (_, annotation) in batch]
+        if self.config.train.dataset == 'coco':
+            annotations = [annotation for (_, annotation) in batch]
+        if self.config.train.dataset == 'voc':
+            annotations = [annotation['annotation']['object'] for (_, annotation) in batch]
         labels = [self.get_labels(annot) for annot in annotations]
         inputs = self.processor(images=images, return_tensors='pt')
         outputs = self.model.forward(**inputs, labels=labels)
         loss = outputs[0]
-        self.log("train_loss", loss)
+        self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        wandb.log({"train/loss": loss})
         return loss
 
     def configure_optimizers(self):
@@ -41,13 +47,18 @@ class DetrModel(LightningModule):
     # TODO: change if we're using two datasets (different setup for VOC data)
     def get_labels(self, annotations: list):
         labels = {}
-        labels['class_labels'] = torch.LongTensor([item['category_id'] for item in annotations if 'category_id' in item]) 
-        labels['boxes'] = torch.FloatTensor([item['bbox'] for item in annotations if 'bbox' in item]) #'bndbox' for voc
+        if self.config.train.dataset == 'coco':
+            labels['class_labels'] = torch.LongTensor([item['category_id'] for item in annotations if 'category_id' in item]) 
+            labels['boxes'] = torch.FloatTensor([item['bbox'] for item in annotations if 'bbox' in item]) #'bndbox' for voc
+        if self.config.train.dataset == 'voc':
+            cat_names = [item['name'] for item in annotations if 'name' in item]
+            labels['class_labels'] = torch.LongTensor(list(map(VOC_TO_COCO_DICT.get, cat_names)))
+            boxes = [item['bndbox'] for item in annotations if 'bndbox' in item]
+            num_boxes = [dict([a, int(x)] for a, x in b.items()) for b in boxes]
+            for b in num_boxes:
+                b['width'] = b['xmax'] - b['xmin']
+                b['height'] = b['ymax'] - b['ymin']
+                b.pop('xmax')
+                b.pop('ymax')
+            labels['boxes'] = torch.FloatTensor([list(d.values()) for d in num_boxes])
         return labels
-
-    # def save_jit(self, file: str = "model.pt") -> None:
-    #     # token_len = self.config["build_features"]["max_sequence_length"]
-    #     # tokens_tensor = torch.ones(1, token_len).long()
-    #     # mask_tensor = torch.ones(1, token_len).float()
-    #     script_model = torch.jit.trace(self) #, [tokens_tensor, mask_tensor])
-    #     script_model.save(file)
