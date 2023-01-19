@@ -1,23 +1,29 @@
 import os
+import pickle
+import gcsfs
 import requests
-import torch
 from PIL import Image
-from transformers import DetrForObjectDetection, DetrImageProcessor
+from categories import COCO_CATEGORIES
 
-os.environ["TRANSFORMERS_CACHE"] = "/tmp"
-os.environ["TORCH_HOME"] = "/tmp"
-print("Env created")
+os.environ['TRANSFORMERS_CACHE'] = '/tmp'
+os.environ['TORCH_HOME'] = '/tmp'
 
-print("Imports done")
+from transformers import DetrImageProcessor
+import torch
 
-processor = DetrImageProcessor.from_pretrained(
-    "facebook/detr-resnet-50", cache_dir="/tmp"
-)
-print("Processor loaded")
-model = DetrForObjectDetection.from_pretrained(
-    "facebook/detr-resnet-50", cache_dir="/tmp"
-)
-print("Model loaded")
+fs = gcsfs.GCSFileSystem(project='DTU-MLOps-Object-Detection')
+
+with fs.open("od-model-checkpoints/deployable_model.pkl", "rb") as file:
+    model = pickle.load(file)
+
+processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50",
+                                               cache_dir='/tmp')
+
+
+class Output():
+    def __init__(self, logits, pred_boxes):
+        self.logits = logits
+        self.pred_boxes = pred_boxes
 
 
 def get_results(pred: dict):
@@ -27,37 +33,23 @@ def get_results(pred: dict):
 
 
 def predict(request):
-    """Responds to any HTTP request.
-    Args:
-        request (flask.Request): HTTP request object.
-    Returns:
-        The response text or any set of values that can be turned into a
-        Response object using
-        `make_response
-        <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
-    """
+
     request_json = request.get_json()
-    # if request.args and 'url' in request.args:
-    url = request_json["url"]
-    image = Image.open(requests.get(url, stream=True).raw)
-    print("Image loaded: ", url)
+    if "url" in request_json.keys():
+        url = request_json['url']
+        image = Image.open(requests.get(url, stream=True).raw)
+        inputs = processor(images=image, return_tensors="pt")
+        outputs = model(**inputs)
+        out = Output(outputs[0], outputs[1])
+        t_sizes = torch.tensor([image.size[::-1]])
+        pred = processor.post_process_object_detection(out,
+                                                       target_sizes=t_sizes,
+                                                       threshold=0.9)[0]
+        results = get_results(pred)
+        results['labels'] = [COCO_CATEGORIES[i] for i in results['labels']]
 
-    inputs = processor(images=image, return_tensors="pt")
-    outputs = model(**inputs)
-    target_sizes = torch.tensor([image.size[::-1]])
-    results = processor.post_process_object_detection(
-        outputs, target_sizes=target_sizes, threshold=0.9
-    )[0]
-    pred_dict = {"predictions": [get_results(d) for d in pred]}
+        return results
 
-    # output_prediction_file = 
-    # os.path.join(output_prediction_dir, "results.json")
-    # json_object = json.dumps(pred_dict, indent=4)
-    # with open(output_prediction_file, "w") as outfile:
-    #     outfile.write(json_object)
-    return pred_dict
-    #     return request.args.get('message')
-    # elif request_json and 'message' in request_json:
-    #     return request_json['message']
-    # else:
-    #     return f'Hello World!'
+    else:
+        return 'Invalid request. Provide image url using "url" key.'
+        

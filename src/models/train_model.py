@@ -13,6 +13,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 
 from src.data.load_dataset import LoadImages
 from src.models.model import DetrModel
+import pickle
 
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
@@ -43,7 +44,8 @@ def main(config: DictConfig):
     else:
         print("Using CPU for training")
 
-    loader = LoadImages(root_dir=HydraConfig.get().runtime.cwd)
+    root_dir = HydraConfig.get().runtime.cwd
+    loader = LoadImages(root_dir=root_dir)
     model = DetrModel(config)
     # saving the model
     output_model_dir = os.path.join(os.getcwd(), "model")
@@ -72,6 +74,9 @@ def main(config: DictConfig):
             config.train.dataset, config.train.batch_size
         ),
     )
+
+    filename = os.path.join(root_dir, 'models', 'deployable_model.pkl')
+    pickle.dump(model.model, open(filename, 'wb'))
 
 
 if __name__ == "__main__":
