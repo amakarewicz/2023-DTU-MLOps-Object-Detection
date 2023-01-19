@@ -237,7 +237,7 @@ DVC and cloud storage is both beneficial for version contral and in projects whe
 >
 > Answer:
 
-We have organized our continous integration into three separate files, one for testing the setup with isort. Isort makes sure the imports are sorted correctly in the code. We have also created one file for testing good code quality with flake8. Flake8 uses pep8 for checking the codestyle and pyflakes for checking syntex. And last but not least we have one continous integration file for running our self created tests of the code to provent possible errors with the data, model and training. The three workflows can be seen under our git actions. For our testing of data that is stored inside dvc we used secret actions to connect to dvc. Due to the large amount of data the test workflows takes some time to run. 
+We have organized our continous integration into three separate files, one for testing the setup with isort. Isort makes sure the imports are sorted correctly in the code. We have also created one file for testing good code quality with flake8. Flake8 uses pep8 for checking the codestyle and pyflakes for checking syntex. And last but not least we have one continous integration file for running our self created tests of the code to provent possible errors with the data, model and training. The three workflows can be seen under our git actions. For our testing of data that is stored inside dvc we used secret actions to connect to dvc. Due to the large amount of data the test workflows takes some time to run. The three actions is activated on push and pull requests on the main branch. They set up python version and dependencies from requirements.txt and additional requirements_test.txt. The workflows has been triggered multiple times due to the uses of branches in the project. The main focus has been on the model and implementation, and therefore not  on fiksing code style and so on, but as a further work possibility and for improving the code, we would like to adjust everything to pep8 when we have more time. 
 
 ## Running code and tracking experiments
 
@@ -270,7 +270,7 @@ Through the configuration files one can easily manage and run a desired version/
 >
 > Answer:
 
---- question 13 fill here ---
+We made use of config files as already explained in the privious question. To reproduce an experiment it would be esential to run with the same hyperparameters which in this project is saved in config files. Furthermore reproducing results would require same environment which is ensured in the requirement files and through the docker images.   
 
 ### Question 14
 
