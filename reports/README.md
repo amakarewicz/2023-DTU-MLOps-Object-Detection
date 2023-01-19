@@ -126,7 +126,7 @@ s184303, s180857, s201773, s222678
 
 We used the [Transformers](https://github.com/huggingface/transformers) framework from Huggingface in our project to perform object detection in images. We used the pretrained [DEtection TRansformer (DETR) model](https://huggingface.co/facebook/detr-resnet-50), which uses a CNN backbone to learn a 2D representation of input image.<br>
 
-Furthermore, we used the dataset  [COCO 2017 dataset](https://cocodataset.org/#download) available through the torchvision module for both training and testing. The dataset consist of images which are annotated with class labels and maskes for each object.    
+Furthermore, we used the dataset  [COCO 2017 dataset](https://cocodataset.org/#download) available through the torchvision module for both training and testing. The dataset consist of images which are annotated with class labels and maskes for each object. We also used another dataset, [VOC](https://public.roboflow.com/object-detection/pascal-voc-2012), for additional experiments on the model and it's performance.  
 
 
 ## Coding environment
@@ -151,6 +151,8 @@ Furthermore, to set up the correct system-level dependencies a new team member w
 > **code. Did you fill out every folder or only a subset?**
 >
 > Answer length: 100-200 words
+>
+>
 
 We initilized our project with the cookicutter template. Most of the default scripts, such as `make_dataset.py`, `model.py`, `train_model.py`, `predict_model.py` etc. have been filled with code for this specific object detection in images-project. Furthermore we have added content to the test scripts which are also set up by default for unit testing. We have mainly followed the pre-created content- and folder structure (src/, report/, notebooks/, etc.), and added additional folders if necessary or convenient. As an example we have created a config folder that keeps track of configuration files for different parts of the project with a default_config.yaml pointing to the task-dependent config files, e.g. predict_config.yaml for prediction reproducability. Furthermore we have updated the requirements.txt to match the required Python environment.<br> We have also added a .dvc folder and additionally dvc file for the storage in dvc. These were both generated automatically when setting up the data version control for the project using dvc with google drive and cloud. 
 
@@ -162,8 +164,8 @@ We initilized our project with the cookicutter template. Most of the default scr
 >
 > Answer length: 50-100 words.
 >
-To insure code quality we have implemented the module `Flake8`. It is a tool that helps to ensure the same code style throughout the project by providing overview of sections where the code does not seems to be following the style and rules suggested by Pep8 (the official style guide for python).<br>
-To a large extend we have also made use of *Typing*, however it's has not been a priority to strickly make sure its present in all our created functions. The use of both typing and docstrings have been a usefull guide to the team, since it easily can become confusing to remember the required insput and uses of the various functions that are develop throghout the project. Github actions has also been used to unsure good code quality, two workflows has been made for flake8 and isort. 
+To insure code quality we have implemented `Flake8`. It is a tool that helps to ensure the same code style throughout the project by providing overview of sections where the code does not seems to be following the style and rules suggested by Pep8. Github actions has also been used to unsure good code quality, two workflows has been made for flake8 and isort. 
+
 
 ## Version control
 
@@ -182,7 +184,7 @@ To a large extend we have also made use of *Typing*, however it's has not been a
 >
 > Answer:
 
-We have implemented tests for data, training and modelling. For the data we test for **x,y,z…..** In total we have implemented X tests. 
+We have implemented tests for data, training and modelling. For the data we test the size of the data to make sure it has the correct size. We have included a skifif so the data test is skiped of the data folder does not have any data. In total we have implemented X tests. 
 
 ### Question 8
 
@@ -217,8 +219,8 @@ The workflow has been highly dependend on version control using git. We used bra
 >
 > Answer:
 
-We used DVC for version control of our data. Furthermore we also made use of google cloud storage for our data. In the end we did not have multiple versions of data and did therefore not use the version control that much, but we were able to set it up for further usage. <br>
-DVC and cloud storage is both beneficial for version contral and in projects where data is transformed and storage in different formates it is useful to have the version contral set up. 
+We used DVC for version control of our data. Furthermore we also made use of google cloud storage for our data. In the end we did not have multiple versions of data and did therefore not use the DVC version control that much, but we were able to set it up for further usage. We also tested that it worked smoothly in case it was needed further on. <br>
+DVC and cloud storage is both beneficial for version contral and in projects where data is transformed and storage into different formates it is useful to have the version contral set up. Version control also gives the possibility to go back if any changes should be changed back later on. 
 
 
 ### Question 11
@@ -235,7 +237,7 @@ DVC and cloud storage is both beneficial for version contral and in projects whe
 >
 > Answer:
 
---- question 11 fill here ---
+We have organized our continous integration into three separate files, one for testing the setup with isort. Isort makes sure the imports are sorted correctly in the code. We have also created one file for testing good code quality with flake8. Flake8 uses pep8 for checking the codestyle and pyflakes for checking syntex. And last but not least we have one continous integration file for running our self created tests of the code to provent possible errors with the data, model and training. The three workflows can be seen under our git actions. For our testing of data that is stored inside dvc we used secret actions to connect to dvc. Due to the large amount of data the test workflows takes some time to run. 
 
 ## Running code and tracking experiments
 
