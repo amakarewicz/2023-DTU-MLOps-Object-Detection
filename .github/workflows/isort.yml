@@ -1,5 +1,5 @@
 
-name: "Run flake8"
+name: "Run isort"
 
 on:
   push:
