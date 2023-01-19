@@ -20,3 +20,4 @@ matplotlib
 timm
 wandb
 scipy
+pickle-mixin

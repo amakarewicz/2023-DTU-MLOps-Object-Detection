@@ -2,11 +2,12 @@
 # pip install click
 # pip install markdown
 
+import re
+import warnings
+from functools import partial
+
 import click
 import markdown
-import warnings
-import re
-from functools import partial
 
 
 class TeacherWarning(UserWarning):
@@ -56,8 +57,10 @@ def check():
         answer = answer.split()
         if not (min <= len(answer) <= max):
             warnings.warn(
-                f"Question {index} failed check. Expected number of words to be"
-                f" between {min} and {max} but got {len(answer)}",
+                (
+                    f"Question {index} failed check. Expected number of words"
+                    f" to be between {min} and {max} but got {len(answer)}"
+                ),
                 TeacherWarning,
             )
 
@@ -65,8 +68,11 @@ def check():
         links = re.findall(r"\!\[.*?\]\(.*?\)", answer)
         if not (min <= len(links) <= max):
             warnings.warn(
-                f"Question {index} failed check. Expected number of screenshots to be"
-                f" between {min} and {max} but got {len(links)}",
+                (
+                    f"Question {index} failed check. Expected number of"
+                    f" screenshots to be between {min} and {max} but got"
+                    f" {len(links)}"
+                ),
                 TeacherWarning,
             )
 
@@ -117,7 +123,8 @@ def check():
     ]
     if len(answers) != 27:
         raise ValueError(
-            "Number of answers are different from the expected 27. Have you filled out every field?"
+            "Number of answers are different from the expected 27. Have you"
+            " filled out every field?"
         )
 
     for i, (ans, const) in enumerate(zip(answers, question_constrains)):
