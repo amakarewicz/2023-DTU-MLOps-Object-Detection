@@ -479,4 +479,9 @@ We also spend a lot of time on the FastAPI to make it work, or the FastAPI was e
 > **make sure all members contributed actively to the project**
 >
 > Answer length: 50-200 words.
+>
+>Answer:
+      
 Student s180857 and s201773 was in charge of setting up the cookiecutter project wereas s222678 was in charge of writing the initial project description. In the process of retrieving the data s222678 was in charge of the coco dataset and s180857 retrieved the voc dataset. For training and prediction s201773 together with s222678 was in charge of the modelling and furthermore s201773 did the visualization. s180857 did the initial development of the docker container, modified by other team members afterwards. Student s184303 set up the google cloud platform and the W&B. Furthermore s184303 was also in charge of continous integration on github. s180857 and s184303 did the unittesting and wrote documentation including this project report. s201773 and s222678 managed to modify the code to train the model in the cloud. All team members has contributed to the code and together the group has modified and improved the code a long the way to make this project.
+      
+      
