@@ -254,7 +254,6 @@ We have organized our continous integration into three separate files, one for t
 We have used the Hydra tool in order to load the relevant configurations for both our python scripts and experiments. 
 Through the configuration files one can easily manage and run a desired version/experiment. Our config files can be used for choosing a specific data set and moreover reproducing an experiment by ensuring the exact same hyperparameters are used.
 
-***Command for running a potential other experiment***<br>
 
 
 ### Question 13
@@ -270,7 +269,7 @@ Through the configuration files one can easily manage and run a desired version/
 >
 > Answer:
 
-We made use of config files as already explained in the privious question. To reproduce an experiment it would be esential to run with the same hyperparameters which in this project is saved in config files. Furthermore reproducing results would require same environment which is ensured in the requirement files and through the docker images.   
+We made use of config files as already explained in the privious question. To reproduce an experiment it would be esential to run with the same hyperparameters which in this project is saved in config files. If multiple experiments were to be made, multiple config files with hyperparameters for each experiment would have to be saved and documented for future reproducerbility. Furthermore reproducing results would require same environment which is ensured in the requirement.txt file and through the docker images. Multiple docker images has been created for different tasks. One docker images has been created for training and another for prdiction.   
 
 ### Question 14
 
@@ -287,7 +286,7 @@ We made use of config files as already explained in the privious question. To re
 >
 > Answer:
 
---- question 14 fill here ---
+As seen in the image multiple test has been run on the training of the model. Some of the tracked runs has been initial testing of the model to further improve the code of the model. Some of the short runs is training that has been stoped due to local capasity and the time of training locally. The runs that has performed the best and run the most is the cloud experiments of the model due to the use of VM. 
 
 ### Question 15
 
