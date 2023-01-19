@@ -62,10 +62,3 @@ class DetrModel(LightningModule):
                 b.pop('ymax')
             labels['boxes'] = torch.FloatTensor([list(d.values()) for d in num_boxes])
         return labels
-
-    # def save_jit(self, file: str = "model.pt") -> None:
-    #     # token_len = self.config["build_features"]["max_sequence_length"]
-    #     # tokens_tensor = torch.ones(1, token_len).long()
-    #     # mask_tensor = torch.ones(1, token_len).float()
-    #     script_model = torch.jit.trace(self) #, [tokens_tensor, mask_tensor])
-    #     script_model.save(file)
