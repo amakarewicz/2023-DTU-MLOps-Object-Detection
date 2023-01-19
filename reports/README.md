@@ -288,6 +288,12 @@ We made use of config files as already explained in the privious question. To re
 
 As seen in the image multiple test has been run on the training of the model. Some of the tracked runs has been initial testing of the model to further improve the code of the model. Some of the short runs is training that has been stoped due to local capasity and the time of training locally. The runs that has performed the best and run the most is the cloud experiments of the model due to the use of VM. 
 
+![wandb1](figures/wandb1.png)
+
+![wandb2](figures/Wandb2.png)
+
+![wandb3](figures/wandb3.png)
+
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
