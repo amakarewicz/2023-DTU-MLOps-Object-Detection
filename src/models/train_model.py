@@ -13,6 +13,7 @@ from time import time
 
 from omegaconf import DictConfig
 from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks import ModelCheckpoint
 
 from src.data.load_dataset import LoadImages
 from src.models.model import DetrModel
@@ -53,6 +54,8 @@ def main(config: DictConfig):
     os.makedirs(output_model_dir, exist_ok=True)
     # output_model_path = os.path.join(output_model_dir, "model.pt")
 
+    model_checkpoint = ModelCheckpoint(dirpath='gs://od-model-checkpoints/')
+
     trainer = Trainer(
         max_epochs= config.train.epochs,
         gpus=gpus,
@@ -60,7 +63,8 @@ def main(config: DictConfig):
         # val_check_interval=1.0,
         # check_val_every_n_epoch=1,
         # gradient_clip_val=1.0,
-        default_root_dir='gs://od-model-checkpoints/'
+        # default_root_dir='gs://od-model-checkpoints/'
+        callbacks=[model_checkpoint]
     )
     trainer.fit(
         model,
