@@ -25,9 +25,12 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements_tests.txt
         pip install dvc 'dvc[gs]'
-    - name: Pull data
-      run: |
-        dvc pull
+    - uses: iterative/setup-dvc@v1
+
+    - name: Get data
+      run: dvc pull
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
     - name: Test with pytest
       run: |
         pip install pytest
