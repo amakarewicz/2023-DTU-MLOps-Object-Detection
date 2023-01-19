@@ -468,9 +468,8 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
-First of all we spend multiple days on retrieving the data and making it fit our model.This was a big challange that we managed to overcome. <br>
-**\*\*\*….**<br>
-We also spend a lot of time on the FastAPI to make it work, or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. 
+First of all we spend multiple days on retrieving the data and making it fit our model.This was a big challange that we managed to overcome.
+We also spend a lot of time on the FastAPI to make it work.Or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. 
 
 
 ### Question 27
