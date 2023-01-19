@@ -66,8 +66,7 @@ end of the project.
 * [x] Used Hydra to load the configurations and manage your hyperparameters
 * [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
-* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
-      consider running a hyperparameter optimization sweep.
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally, consider running a hyperparameter optimization sweep.
 * [x] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 ### Week 2
@@ -75,7 +74,7 @@ end of the project.
 * [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
 * [x] Calculate the coverage.
-* [ ] Get some continuous integration running on the github repository
+* [x] Get some continuous integration running on the github repository
 * [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [x] Create a trigger workflow for automatically building your docker images
 * [x] Get your model training in GCP using either the Engine or Vertex AI
@@ -250,9 +249,11 @@ DVC and cloud storage is both beneficial for version contral and in projects whe
 >
 > Answer length: 50-100 words.
 >
+We have used the Hydra tool in order to load the relevant configurations for both our python scripts and experiments. 
+Through the configuration files one can easily manage and run a desired version/experiment. Our config files can be used for choosing a specific data set and moreover reproducing an experiment by ensuring the exact same hyperparameters are used.
 
-In order to configure our python scripts we created configuration files and used Hydra to load the configurations.
-Regarding experiements we used **XXX** as a tool to manage the hyperparameters, which works in the following way: **(python my_script.py --lr 1e-3 --batch_size 25)**
+***Command for running a potential other experiment***<br>
+
 
 ### Question 13
 
@@ -469,13 +470,4 @@ We also spend a lot of time on the FastAPI to make it work, or the FastAPI was e
 > **make sure all members contributed actively to the project**
 >
 > Answer length: 50-200 words.
->
-> Example:
-> *Student sXXXXXX was in charge of developing of setting up the initial cookie cutter project and developing of the*
-> *docker containers for training our applications.*
-> *Student sXXXXXX was in charge of training our models in the cloud and deploying them afterwards.*
-> *All members contributed to code by...*
->
-> Answer:
-
-Student s180857 and s201773 was in charge of setting up the cookiecutter project wereas s222678 was in charge of writing the initial project description. In the process of retrieving the data s222678 was in charge of the coco dataset and s180857 retrieved the voc dataset. For training and prediction s201773 together with s222678 was in charge of the modelling and furthermore s201773 did the visualization. s180857 did the initial development of the docker container, modified by other team members afterwards. Student s184303 set up the google cloud platform and the W&B and together with s180857, s184303 did the unittesting, CI  and wrote documentation including this project report. s201773 and s222678 managed to modify the code to train the model in the cloud. All team members has contributed to the code and together the group has modified and improved the code a long the way to make this project. 
+Student s180857 and s201773 was in charge of setting up the cookiecutter project wereas s222678 was in charge of writing the initial project description. In the process of retrieving the data s222678 was in charge of the coco dataset and s180857 retrieved the voc dataset. For training and prediction s201773 together with s222678 was in charge of the modelling and furthermore s201773 did the visualization. s180857 did the initial development of the docker container, modified by other team members afterwards. Student s184303 set up the google cloud platform and the W&B and together with s180857, s184303 did the unittesting, CI  and wrote documentation including this project report. s201773 and s222678 managed to modify the code to train the model in the cloud. All team members has contributed to the code and together the group has modified and improved the code a long the way to make this project.
