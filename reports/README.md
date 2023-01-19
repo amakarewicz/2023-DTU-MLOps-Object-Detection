@@ -74,7 +74,7 @@ end of the project.
 * [x] Write unit tests related to the data part of your code
 * [ ] Write unit tests related to model construction and or model training
 * [x] Calculate the coverage.
-* [ ] Get some continuous integration running on the github repository
+* [x] Get some continuous integration running on the github repository
 * [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [x] Create a trigger workflow for automatically building your docker images
 * [x] Get your model training in GCP using either the Engine or Vertex AI
