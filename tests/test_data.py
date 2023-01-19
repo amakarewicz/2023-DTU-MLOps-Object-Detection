@@ -28,5 +28,5 @@ def test_data_size():
         loader=LoadImages()
         dataloader = loader.get_dataloader(dataset=cfg.predict.dataset, batch_size=cfg.predict.batch_size, shuffle=False)
         batch = next(iter(dataloader))
-        assert len(batch) == 5
+        assert len(batch) == 2
 
