@@ -324,7 +324,7 @@ Wa have created a docker file to train our model in a cloud environment. The doc
 >
 > Answer:
 
-When training the model and using it for prediction we ran into some challenges including bugs and other errors. Also in the process of retriving the data, we had some bugs to solve. We asolve the problems by detecting the code, printing 
+When training the model and using it for prediction we ran into some challenges including bugs and other errors. Also in the process of retriving the data, we had some bugs to solve. We solve the problems by detecting the code, usimg print statements and helping each other. Another way to tackle bugs could be to use profiling. 
 
 ## Working in the cloud
 
