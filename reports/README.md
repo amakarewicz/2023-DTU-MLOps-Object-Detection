@@ -184,7 +184,7 @@ To insure code quality we have implemented `Flake8`. It is a tool that helps to 
 >
 > Answer:
 
-We have implemented tests for data and code structure. For the data we test the shape of the dataloader batch to make sure it has the correct shape. We have included a skifif so the data test is skiped of the data folder does not have any data. We also text pep8 and isort corectness of our code. In total we implemented 3 tests.
+We have implemented tests for data and code structure. For the data we test the shape of the dataloader batch to make sure it has the correct shape. We have included a skipif so the data test is skiped of the data folder does not have any data. We also test pep8 and isort corectness of our code. In total we implemented 3 tests.
 
 ### Question 8
 
