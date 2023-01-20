@@ -1,5 +1,5 @@
 import logging
-import os
+# import os
 # from google.cloud import secretmanager
 
 import hydra
@@ -13,8 +13,8 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 
 from src.data.load_dataset import LoadImages
 from src.models.model import DetrModel
-import pickle
-import gcsfs
+# import pickle
+# import gcsfs
 
 
 @hydra.main(config_path="../conf", config_name="default_config.yaml")
