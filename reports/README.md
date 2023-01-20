@@ -458,7 +458,7 @@ s184303 has 0 credit left due to the large training of the model. We managed to 
 >
 > Answer:
 
-The first step in our process was setting up everything on our local machines: getting the data, creating the model, training and prediction script. We also created version contral on dvs in the beginning of our process. From the local machines we used branches to modify our code, and then used pull request to the main. The pull requests triggers the git actions for testing the code befor merging. When everything was set up on github we used gcp triggers to build docker images in the container registry in the cloud. We also stored our data in the google cloud storage. For training we used Vertex AI and stored model veriables in Weights and Biasis. To deploy the model in the cloud we used FastAPI. 
+The first step in our process was setting up everything on our local machines: getting the data, creating the model, training and prediction script. We also created version contral on dvs in the beginning of our process. From the local machines we used branches to modify our code, and then used pull request to the main. The pull requests triggers the git actions for testing the code befor merging. When everything was set up on github we used gcp triggers to build docker images in the container registry in the cloud. We also stored our data in the google cloud storage. For training we used Vertex AI and stored model veriables in Weights and Biasis. To deploy the model in the cloud we used goggle cloud functions. 
 
 If a user wants to reproduce our model, they have to clone our code and use the docker images. Furthermore the model can be used from the query server. 
 
