@@ -1,0 +1,11 @@
+# Function dependencies, for example:
+# package>=version
+requests
+transformers
+pillow
+timm
+-f https://download.pytorch.org/whl/torch_stable.html
+torch==1.12.1+cpu
+pickle-mixin
+google-cloud-storage
+gcsfs
