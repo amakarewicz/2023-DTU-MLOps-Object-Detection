@@ -184,7 +184,7 @@ To insure code quality we have implemented `Flake8`. It is a tool that helps to 
 >
 > Answer:
 
-We have implemented tests for data, training and modelling. For the data we test the size of the data to make sure it has the correct size. We have included a skifif so the data test is skiped of the data folder does not have any data. In total we have implemented X tests. 
+We have implemented tests for data and code structure. For the data we test the shape of the dataloader batch to make sure it has the correct shape. We have included a skipif so the data test is skiped of the data folder does not have any data. We also test pep8 and isort corectness of our code. In total we implemented 3 tests.
 
 ### Question 8
 
@@ -195,7 +195,7 @@ We have implemented tests for data, training and modelling. For the data we test
 >
 > Answer:
 
-The total code coverage of code is **X %**. The coverage-metric is based on to what extend all functions in the model are called in the test functions. Even if we had 100 % code coverage, i.e. all functions are called at least one time during project testing, we would still not be able to completely trust the code. The reason this is not bullet-proof is that you may not cover all possible error types even though the function is used in a test and some unintended input/output errors may go undiscovered because you test for something else. It is a tedious and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for. 
+The total code coverage of code in the test is 62 % for the data test and 0 % for the model, since we did not have the time to implement test of model as well. The coverage-metric is based on to what extend all functions in the model are called in the test functions. Even if we had 100 % code coverage, i.e. all functions are called at least one time during project testing, we would still not be able to completely trust the code. The reason this is not bullet-proof is that you may not cover all possible error types even though the function is used in a test and some unintended input/output errors may go undiscovered because you test for something else. It is a tedious and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for. 
 
 ### Question 9
 
@@ -309,7 +309,7 @@ The last picture shows that the loss does not change much ower time. This could 
 >
 > Answer:
 
-We have created two docker images for our project, one for training and one for predicting. (In our google cloud platform we have multiple docker images due to multiple experiments with different versions of our docker images).   
+Wa have created a docker file to train our model in a cloud environment. The docker sets up the software needed for training and runs the train_model.py script. Docker container is created in Container Registry, thanks to the trigger, every time we push changes to the main branch in git repository. Then we manually run a vertex AI trainning using config_cpu/gpu.yaml configuration files, and already built container.
 
 ### Question 16
 
@@ -324,7 +324,7 @@ We have created two docker images for our project, one for training and one for 
 >
 > Answer:
 
---- question 16 fill here ---
+When training the model and using it for prediction we ran into some challenges including bugs and other errors. Also in the process of retriving the data, we had some bugs to solve. We solve the problems by detecting the code, usimg print statements and helping each other. Another way to tackle bugs could be to use profiling. 
 
 ## Working in the cloud
 
@@ -341,10 +341,8 @@ We have created two docker images for our project, one for training and one for 
 >
 > Answer:
 
-We used the following five services on the google cloud platform: Cloud Storage(Bucket), Compute Engine, Cloud Build(Triggers), Container Registy and Vertex AI.<br>
-Vertex AI is used for training the model. Vertex AI creates a VM and use the training docker image to train the model. The docker images is stored in the Container Registy and the images is uploaded to the cloud by the Cloud Build Triggers.<br>
-Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we started by using Computer Engine and created VM, but later on we used Vertex AI to create the VM. 
-
+We used the following five services on the google cloud platform: Cloud Storage(Bucket), Cloud Build(Triggers), Container Registy, Vertex AI and Cloud Functions.<br><br>
+We used Cloud Build to automate creating docker containers in the cloud. Then we save the containers in a Container Registry. We use created containers to train the model with Vertex AI jobs. Trained models are saved in the Cloud Storage Bucket. Finally we deploy the model using Cloud Functions.
 
 ### Question 18
 
@@ -359,7 +357,7 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
---- question 18 fill here ---
+We use cloud engines when we run Vertex AI trainning. Due to large size of the model, we decided to use high memory engine - n1-highmem-16 which has 16 CPUs and 104 GB memory.
 
 ### Question 19
 
@@ -404,7 +402,13 @@ Furthermore the data is stored in a Bucket in Cloud Storage. In the beginning we
 >
 > Answer:
 
-We managed to deploy the model in the cloud. 
+We managed to deploy the model in the cloud using Cloud Functions. The application takes the url path to the image as an input, and returns bounding boxes and labels of the objects in the image. We invoke it sending curl post request with the url path to the image:<br>
+curl -m 70 -X POST https://europe-west1-dtu-mlops-object-detection.cloudfunctions.net/od-predict-from-pickle \
+-H "Authorization: bearer $(gcloud auth print-identity-token)" \
+-H "Content-Type: application/json" \
+-d '{"url": "https://paradepets.com/.image/t_share/MTkxMzY1Nzg4NjczMzIwNTQ2/cutest-dog-breeds-jpg.jpg"}'
+      
+![Function](figures/CloudFunction.png)
 
 ### Question 23
 
@@ -419,7 +423,7 @@ We managed to deploy the model in the cloud.
 >
 > Answer:
 
---- question 23 fill here ---
+We did not manage to implement monitoring. In the future development, we would add monitoring to track shifting of the data distribution, so that we would know when we need to retrain our model on new dataset.
 
 ### Question 24
 
@@ -433,7 +437,7 @@ We managed to deploy the model in the cloud.
 >
 > Answer:
 
-s184303 has 0 credit left due to the large training of the model. 
+s184303 has 0 credit left due to the large training of the model. We managed to add credit from one of the other team members to the project so the deployment is able to run in the cloud.
 
 ## Overall discussion of project
 
@@ -454,7 +458,7 @@ s184303 has 0 credit left due to the large training of the model.
 >
 > Answer:
 
-The first step in our process was setting up everything on our local machines: getting the data, creating the model, training and prediction script. We also created version contral on dvs in the beginning of our process. From the local machines we used branches to modify our code, and then used pull request to the main. The pull requests triggers the git actions for testing the code befor merging. When everything was set up on github we used gcp triggers to build docker images in the container registry in the cloud. We also stored our data in the google cloud storage. For training we used Vertex AI and stored model veriables in Weights and Biasis. To deploy the model in the cloud we used FastAPI. 
+The first step in our process was setting up everything on our local machines: getting the data, creating the model, training and prediction script. We also created version contral on dvs in the beginning of our process. From the local machines we used branches to modify our code, and then used pull request to the main. The pull requests triggers the git actions for testing the code befor merging. When everything was set up on github we used gcp triggers to build docker images in the container registry in the cloud. We also stored our data in the google cloud storage. For training we used Vertex AI and stored model veriables in Weights and Biasis. To deploy the model in the cloud we used goggle cloud functions. 
 
 If a user wants to reproduce our model, they have to clone our code and use the docker images. Furthermore the model can be used from the query server. 
 
@@ -472,9 +476,7 @@ If a user wants to reproduce our model, they have to clone our code and use the 
 >
 > Answer:
 
-First of all we spend multiple days on retrieving the data and making it fit our model. This was a big challenge that we managed to overcome.
-We also spend a lot of time on the FastAPI to make it work.Or the FastAPI was easy enough but it took us a long time making the predict model output fit into the FastAPI. Furthermore we had troubles making the unittest for the model and training and did not manage to make it work (therefore not included in the commited project). It was a difficult challenge and we ended up spending a lot of time on this task. 
-
+The first struggle that we had, was the problem with the data. Downloading the data using dedicated packages took us multiple hours, and then fitting downloaded data to the train and predict modules costed us some more time. After that, we had problems with crreating a docker file. The cloud deployment returned us very misleading errors, which stopped us for 2 full days. We eventualy managed to create a proper docker (there was a problem with dvc pull) locally, and deploy it to the cloud. Finally, it appeared that our model is not compatible with pytorch lightning jit saving, which complicated saving trained models in a cloud. We developed a workaround with pickling the model and saving it after training in a gcp bucket. We wanted to deploy the model in the FastAPI, but this part was also problematic, and due to lack of time, we opted for Cloud Functions instead.
 
 ### Question 27
 
