@@ -408,7 +408,7 @@ curl -m 70 -X POST https://europe-west1-dtu-mlops-object-detection.cloudfunction
 -H "Content-Type: application/json" \
 -d '{"url": "https://paradepets.com/.image/t_share/MTkxMzY1Nzg4NjczMzIwNTQ2/cutest-dog-breeds-jpg.jpg"}'
       
-![Function](figures/Function.png)
+![Function](figures/CloudFunction.png)
 
 ### Question 23
 
