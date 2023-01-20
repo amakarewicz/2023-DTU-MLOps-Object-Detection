@@ -324,7 +324,7 @@ Wa have created a docker file to train our model in a cloud environment. The doc
 >
 > Answer:
 
---- question 16 fill here ---
+When training the model and using it for prediction we ran into some challenges including bugs and other errors. Also in the process of retriving the data, we had some bugs to solve. We asolve the problems by detecting the code, printing 
 
 ## Working in the cloud
 
@@ -341,7 +341,7 @@ Wa have created a docker file to train our model in a cloud environment. The doc
 >
 > Answer:
 
-We used the following five services on the google cloud platform: Cloud Storage(Bucket), Cloud Build(Triggers), Container Registy, Vertex AI. and Cloud Functions.<br><br>
+We used the following five services on the google cloud platform: Cloud Storage(Bucket), Cloud Build(Triggers), Container Registy, Vertex AI and Cloud Functions.<br><br>
 We used Cloud Build to automate creating docker containers in the cloud. Then we save the containers in a Container Registry. We use created containers to train the model with Vertex AI jobs. Trained models are saved in the Cloud Storage Bucket. Finally we deploy the model using Cloud Functions.
 
 ### Question 18
