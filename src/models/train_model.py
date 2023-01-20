@@ -48,10 +48,6 @@ def main(config: DictConfig):
     root_dir = HydraConfig.get().runtime.cwd
     loader = LoadImages(root_dir=root_dir)
     model = DetrModel(config)
-    # saving the model
-    output_model_dir = os.path.join(os.getcwd(), "model")
-    os.makedirs(output_model_dir, exist_ok=True)
-    # output_model_path = os.path.join(output_model_dir, "model.pt")
 
     model_checkpoint = ModelCheckpoint(dirpath="gs://od-model-checkpoints/")
 
@@ -80,10 +76,10 @@ def main(config: DictConfig):
     # filename = os.path.join(root_dir, 'models', 'deployable_model.pkl')
     # pickle.dump(model.model, open(filename, 'wb'))
 
-    # Cloud
-    fs = gcsfs.GCSFileSystem(project='DTU-MLOps-Object-Detection')
-    with fs.open("od-model-checkpoints/deployable_model.pkl", "wb") as file:
-        pickle.dump(model.model, file)
+    # Cloud - not working
+    # fs = gcsfs.GCSFileSystem(project='DTU-MLOps-Object-Detection')
+    # with fs.open("od-model-checkpoints/deployable_model.pkl", "wb") as file:
+    #     pickle.dump(model.model, file)
 
 
 if __name__ == "__main__":
