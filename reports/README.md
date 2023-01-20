@@ -437,7 +437,7 @@ We did not manage to implement monitoring. In the future development, we would a
 >
 > Answer:
 
-s184303 has 0 credit left due to the large training of the model. 
+s184303 has 0 credit left due to the large training of the model. We managed to add credit from one of the other team members to the project so the deployment is able to run in the cloud.
 
 ## Overall discussion of project
 
