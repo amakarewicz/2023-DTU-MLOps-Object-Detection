@@ -195,7 +195,7 @@ We have implemented tests for data and code structure. For the data we test the 
 >
 > Answer:
 
-The total code coverage of code is **X %**. The coverage-metric is based on to what extend all functions in the model are called in the test functions. Even if we had 100 % code coverage, i.e. all functions are called at least one time during project testing, we would still not be able to completely trust the code. The reason this is not bullet-proof is that you may not cover all possible error types even though the function is used in a test and some unintended input/output errors may go undiscovered because you test for something else. It is a tedious and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for. 
+The total code coverage of code in the test is 62 % for the data test and 0 % for the model, since we did not have the time to implement test of model as well. The coverage-metric is based on to what extend all functions in the model are called in the test functions. Even if we had 100 % code coverage, i.e. all functions are called at least one time during project testing, we would still not be able to completely trust the code. The reason this is not bullet-proof is that you may not cover all possible error types even though the function is used in a test and some unintended input/output errors may go undiscovered because you test for something else. It is a tedious and almost impossible task to test for everything in every part of the code. But having a high test coverage at least indicates that some consideration about possible errors is tested for. 
 
 ### Question 9
 
